@@ -3,6 +3,7 @@ package com.example.myapp_1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String str_password = password.getText().toString().trim();
         String str_phone = phone.getText().toString().trim();
 
-
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(str_email, str_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -68,10 +69,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterActivity.this, "The proccess pass successfuly!!",Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
+                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                             }
                             else{
-                                Toast.makeText(RegisterActivity.this, "The proccess not pass successfuly!!",Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.VISIBLE);
+                                Toast.makeText(RegisterActivity.this, "The proccess1 not pass successfuly!!",Toast.LENGTH_LONG).show();
+                                progressBar.setVisibility(View.GONE);
 
                             }
                         }
@@ -79,8 +81,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 }
                 else{
-                    Toast.makeText(RegisterActivity.this, "The proccess not pass successfuly!!",Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.VISIBLE);
+                    Toast.makeText(RegisterActivity.this, "Failed to Register, please check your credentials!!",Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });

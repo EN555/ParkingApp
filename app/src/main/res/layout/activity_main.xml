@@ -39,7 +39,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/login"
         android:layout_width="204dp"
         android:layout_height="42dp"
         android:background="@color/colorPrimary"
@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.632" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/editEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -69,7 +69,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editPassword"
         android:layout_width="213dp"
         android:layout_height="56dp"
         android:ems="10"
@@ -127,6 +127,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.537" />
+
+        <ProgressBar
+        android:layout_width="240dp"
+        android:id="@+id/progressbar"
+        android:layout_height="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.949"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

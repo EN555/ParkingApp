@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     Toast.makeText(MainActivity.this, "Please try Again!", Toast.LENGTH_LONG).show();
-
+                    progressbar.setVisibility(View.GONE);
                 }
             }
         });

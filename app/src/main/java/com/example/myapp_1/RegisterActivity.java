@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 Toast.makeText(RegisterActivity.this, "The proccess pass successfuly!!",Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
                                 Intent i = new Intent(RegisterActivity.this, UserProfile.class);
-                                i.putExtra("user", user);     /* to-do : pass user data */
+                                i.putExtra("user", user);
                                 startActivity(i);
                             }
                             else{

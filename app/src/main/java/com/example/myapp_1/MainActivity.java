@@ -77,7 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressbar.setVisibility(View.GONE);
-                    startActivity(new Intent(MainActivity.this, UserProfile.class));
+                    Intent i = new Intent(MainActivity.this, UserProfile.class);
+                    i.putExtra("user", new User());     /* to-do : pass user data */
+                    startActivity(i);
                 }
                 else{
                     Toast.makeText(MainActivity.this, "Please try Again!", Toast.LENGTH_LONG).show();

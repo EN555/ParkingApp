@@ -62,14 +62,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()){
-                    User user = new User(str_phone, str_password, str_email);
+                    User user = new User(str_phone, str_password, str_email, "name"); /* to-do : add name */
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterActivity.this, "The proccess pass successfuly!!",Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
-                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                Intent i = new Intent(RegisterActivity.this, UserProfile.class);
+                                i.putExtra("user", user);     /* to-do : pass user data */
+                                startActivity(i);
                             }
                             else{
                                 Toast.makeText(RegisterActivity.this, "The proccess1 not pass successfuly!!",Toast.LENGTH_LONG).show();

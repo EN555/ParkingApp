@@ -14,7 +14,6 @@
         android:background="@color/colorPrimary"
         android:fontFamily="@font/acme"
         android:text="Forgot Password?"
-        android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

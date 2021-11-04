@@ -73,7 +73,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/PersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

@@ -73,11 +73,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressbar.setVisibility(View.VISIBLE);
 
-//        if(!Patterns.EMAIL_ADDRESS.matcher(str_email).matches()){
-//            email.setError("Invalid Email!");
-//            email.requestFocus();
-//        }
+        //-------------- CHECK INPUT---------------------//
+        if(str_email.isEmpty()){
+            email.setError("Invalid Email!");
+            email.requestFocus();
+            progressbar.setVisibility(View.GONE);
+            return;
+        }
 
+        if(!Patterns.EMAIL_ADDRESS.matcher(str_email).matches()){
+            email.setError("Invalid Email!");
+            email.requestFocus();
+            progressbar.setVisibility(View.GONE);
+            return;
+        }
+
+        if(str_password.isEmpty()){
+            password.setError("Invalid Password!");
+            password.requestFocus();
+            progressbar.setVisibility(View.GONE);
+            return;
+        }
+
+        //--------------CONNECT TO THE SERVER------------------
         mAuth.signInWithEmailAndPassword(str_email, str_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -90,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     else{
                         Toast.makeText(MainActivity.this, "verify your email Again!", Toast.LENGTH_LONG).show();
-
+                        progressbar.setVisibility(View.GONE);
                     }
                 }
                 else{

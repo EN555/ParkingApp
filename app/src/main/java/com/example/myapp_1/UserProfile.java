@@ -10,8 +10,8 @@ import android.widget.EditText;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener{
 
     private User user;
-    Button search, publish, delete;
-    EditText helloText;
+    private Button search, publish, delete;
+    private EditText helloText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         SetButtonsListeners();
 
         // set text to say hello to the user
-        helloText.setText("hello " + user.name);
+        helloText.setText("hello " + user.getName());
 
     }
 

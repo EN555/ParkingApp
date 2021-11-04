@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -62,16 +63,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()){
+
                     User user = new User(str_phone, str_password, str_email, "name"); /* to-do : add name */
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "The proccess pass successfuly!!",Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
-                                Intent i = new Intent(RegisterActivity.this, UserProfile.class);
-                                i.putExtra("user", user);
-                                startActivity(i);
+                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RegisterActivity.this, "pass successfully, verify in your email!", Toast.LENGTH_LONG).show();
+                                        }
+                                        else{
+                                            Toast.makeText(RegisterActivity.this, "not pass!", Toast.LENGTH_LONG).show();
+
+                                        }
+                                    }
+                                });
+                                FirebaseUser user_check = FirebaseAuth.getInstance().getCurrentUser();
+                                    progressBar.setVisibility(View.GONE);
+                                    Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                               //     i.putExtra("user", user);
+                                    startActivity(i);
                             }
                             else{
                                 Toast.makeText(RegisterActivity.this, "The proccess1 not pass successfuly!!",Toast.LENGTH_LONG).show();

@@ -108,22 +108,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     progressbar.setVisibility(View.GONE);
                     if(mAuth.getCurrentUser().isEmailVerified()) {
                         Intent i = new Intent(MainActivity.this, UserProfile.class);
-//                        FirebaseDatabase data_base = FirebaseDatabase.getInstance();
-//                        //mAuth.getInstance().getCurrentUser().getUid()
-//                        DatabaseReference data_ref= data_base.getReference("Users");
-//                        data_ref.addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                //User us = snapshot.getValue(User.class);
-                      i.putExtra(" ds", new User());     /* to-do : pass user data */
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError error) {
-//
-//                            }
-//                        });
-                        startActivity(i);
+                        FirebaseDatabase data_base = FirebaseDatabase.getInstance();
+                        DatabaseReference data_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid());
+                        data_ref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                User us = snapshot.getValue(User.class);
+                                i.putExtra("user", us);     /* to-do : pass user data */
+                                startActivity(i);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                     else{
                         Toast.makeText(MainActivity.this, "verify your email Again!", Toast.LENGTH_LONG).show();

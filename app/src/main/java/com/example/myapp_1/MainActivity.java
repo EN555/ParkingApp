@@ -27,8 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.prefs.Preferences;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button Register, Login, Forgot_Password;
     private EditText email, password;
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
             case R.id.login:
-                validation();
+                loginButtonFunc();
                 break;
             case R.id.forgotpassword:
                 startActivity(new Intent(this, ForgotPassword.class));
@@ -86,56 +84,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void validation(){
-        String str_email = email.getText().toString().trim();
-        String str_password = password.getText().toString().trim();
+    /**
+     * get email and password from screen, and try to log in
+     */
+    private void loginButtonFunc(){
 
         progressbar.setVisibility(View.VISIBLE);
 
-        //-------------- CHECK INPUT---------------------//
+        // get email and password from screen
+        String str_email = email.getText().toString().trim();
+        String str_password = password.getText().toString().trim();
 
-        if(!User.CheckValidEMail(str_email)){
+
+        // check input
+        if(!InputChecks.CheckValidEMail(str_email)){
             email.setError("Invalid Email!");
             email.requestFocus();
             return;
         }
-        if(!User.CheckValidPassword(str_password)){
+        if(!InputChecks.CheckValidPassword(str_password)){
             password.setError("Invalid Password!");
             password.requestFocus();
             return;
         }
 
-//        if(str_email.isEmpty()){
-//            email.setError("Invalid Email!");
-//            email.requestFocus();
-//            progressbar.setVisibility(View.GONE);
-//            return;
-//        }
-//
-//        if(!Patterns.EMAIL_ADDRESS.matcher(str_email).matches()){
-//            email.setError("Invalid Email!");
-//            email.requestFocus();
-//            progressbar.setVisibility(View.GONE);
-//            return;
-//        }
-//
-//        if(str_password.isEmpty()){
-//            password.setError("Invalid Password!");
-//            password.requestFocus();
-//            progressbar.setVisibility(View.GONE);
-//            return;
-//        }
+        // try to log in
+        validation(str_email, str_password);
+    }
+
+
+    /**
+     * try to log in to the app, with the provided email and password
+     */
+    private void validation(String email, String password){
+
 
         //--------------CONNECT TO THE SERVER------------------
-        mAuth.signInWithEmailAndPassword(str_email, str_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressbar.setVisibility(View.GONE);
                     if(mAuth.getCurrentUser().isEmailVerified()) {
                         Intent i = new Intent(MainActivity.this, UserProfile.class);
-                        i.putExtra("user", new User());
-                        startActivity(i);
+                        FirebaseDatabase data_base = FirebaseDatabase.getInstance();
+                        DatabaseReference data_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid());
+                        data_ref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                User us = snapshot.getValue(User.class);
+                                i.putExtra("user", us);     /* to-do : pass user data */
+                                startActivity(i);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                     else{
                         Toast.makeText(MainActivity.this, "verify your email Again!", Toast.LENGTH_LONG).show();

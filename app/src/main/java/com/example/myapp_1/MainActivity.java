@@ -20,6 +20,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+<<<<<<< HEAD
+=======
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+>>>>>>> 8ec7d7f449d7f30876fd045e7d34e0f9b7b8a1cf
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button Register, Login, Forgot_Password;
@@ -103,8 +111,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     progressbar.setVisibility(View.GONE);
                     if(mAuth.getCurrentUser().isEmailVerified()) {
                         Intent i = new Intent(MainActivity.this, UserProfile.class);
+<<<<<<< HEAD
                         i.putExtra("user", new User());     /* to-do : pass user data */
                         startActivity(i);
+=======
+                        FirebaseDatabase data_base = FirebaseDatabase.getInstance();
+                        DatabaseReference data_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid());
+                        data_ref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                User us = snapshot.getValue(User.class);
+                                i.putExtra("user", us);     /* to-do : pass user data */
+                                startActivity(i);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+>>>>>>> 8ec7d7f449d7f30876fd045e7d34e0f9b7b8a1cf
                     }
                     else{
                         Toast.makeText(MainActivity.this, "verify your email Again!", Toast.LENGTH_LONG).show();

@@ -28,9 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button Register, Login, Forgot_Password, manager;
+    private Button Register, Login, Forgot_Password;
     private EditText email, password;
     private CheckBox manager_acc;
     private ProgressBar progressbar;
@@ -49,11 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-<<<<<<< HEAD
-        manager = (Button)findViewById(R.id.manager);
-        manager.setOnClickListener(this);
-
-=======
     /**
      * get all elements on the screen (Buttons, texts, ...) as objects of the class
      */
@@ -61,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Register = (Button)findViewById(R.id.register);
         Forgot_Password = (Button)findViewById(R.id.forgotpassword);
         Login = (Button)findViewById(R.id.login);
->>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         email = (EditText)findViewById(R.id.editEmailAddress);
         password = (EditText)findViewById(R.id.editPassword);
         progressbar = (ProgressBar)findViewById(R.id.progressbar);
@@ -90,9 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.forgotpassword:
                 startActivity(new Intent(this, ForgotPassword.class));
-                break;
-            case R.id.manager:
-                startActivity(new Intent(this, ManagerActivity.class));
                 break;
         }
     }
@@ -140,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     progressbar.setVisibility(View.GONE);
                     if(mAuth.getCurrentUser().isEmailVerified()) {
                         Intent i = new Intent(MainActivity.this, UserProfile.class);
-
                         FirebaseDatabase data_base = FirebaseDatabase.getInstance();
                         DatabaseReference data_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid());
                         data_ref.addValueEventListener(new ValueEventListener() {
@@ -166,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                         }
                                     });
-                                    }
+                                }
                                 else{
                                     i.putExtra("user", us);     /* to-do : pass user data */
                                     startActivity(i);
@@ -178,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             }
                         });
-
                     }
                     else{
                         Toast.makeText(MainActivity.this, "verify your email Again!", Toast.LENGTH_LONG).show();

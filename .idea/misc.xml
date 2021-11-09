@@ -6,25 +6,28 @@
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/font/acme.xml" value="0.1390625" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/font/aladin.xml" value="0.14010416666666667" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/font/lobster.xml" value="0.14010416666666667" />
+        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_forgot_pass.xml" value="0.1" />
+        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_forgot_password.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_login.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_main.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_main2.xml" value="0.12571428571428572" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_main3.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_publish.xml" value="0.2857142857142857" />
-        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_register.xml" value="0.18857142857142858" />
+        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_register.xml" value="0.15639810426540285" />
+        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_reset.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_reset_password.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_user_profile.xml" value="0.2857142857142857" />
-<<<<<<< HEAD
+        <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/activity_manager.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/activity_manager3.xml" value="0.16354166666666667" />
+        <entry key="app/src/main/res/layout/activity_publish.xml" value="0.29010416666666666" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/content_manager.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.29438405797101447" />
-=======
-        <entry key="..\:/Users/nir son/AndroidStudioProjects/ParkingApp/app/src/main/res/layout/activity_main.xml" value="0.14427083333333332" />
-        <entry key="..\:/Users/nir son/AndroidStudioProjects/ParkingApp/app/src/main/res/layout/activity_publish.xml" value="0.3333333333333333" />
->>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
       </map>
     </option>
   </component>

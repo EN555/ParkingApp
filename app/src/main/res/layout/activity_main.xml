@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/_234"
+    android:background="@drawable/_8484"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/forgotpassword"
         android:layout_width="188dp"
         android:layout_height="42dp"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/darker_gray"
         android:fontFamily="@font/acme"
         android:text="Forgot Password?"
         android:textSize="15dp"
@@ -27,7 +27,7 @@
         android:layout_width="140dp"
         android:layout_height="42dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/darker_gray"
         android:fontFamily="@font/acme"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,18 +40,13 @@
         android:id="@+id/login"
         android:layout_width="204dp"
         android:layout_height="42dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/teal_700"
+        android:background="@android:color/darker_gray"
         android:fontFamily="@font/acme"
         android:text="Login"
-        android:visibility="visible"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.632" />
@@ -61,11 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-<<<<<<< HEAD
-=======
         android:hint="Email Address"
-        android:textAlignment="center"
->>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -108,40 +99,10 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.306"
+        app:layout_constraintVertical_bias="0.28"
         tools:ignore="MissingConstraints" />
 
-<<<<<<< HEAD
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="193dp"
-        android:layout_height="58dp"
-        android:text="Email Address"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="95dp"
-        android:layout_height="58dp"
-        android:text="Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.607"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
-
     <ProgressBar
-=======
-    <ProgressBar
-        android:layout_width="240dp"
->>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         android:id="@+id/progressbar"
         android:layout_width="240dp"
         android:layout_height="53dp"
@@ -154,26 +115,20 @@
         app:layout_constraintVertical_bias="0.949"
         tools:ignore="MissingConstraints" />
 
-<<<<<<< HEAD
-    <Button
-        android:id="@+id/manager"
-=======
     <CheckBox
         android:id="@+id/ManagerPermission"
->>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView3"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -181,14 +136,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152"
+        app:layout_constraintVertical_bias="0.122"
         app:srcCompat="@drawable/gif" />
-=======
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
->>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

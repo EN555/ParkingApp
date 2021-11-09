@@ -56,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Email Address"
         android:textAlignment="center"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,9 +72,9 @@
         android:layout_width="213dp"
         android:layout_height="56dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
@@ -101,32 +102,7 @@
         app:layout_constraintVertical_bias="0.137"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="193dp"
-        android:layout_height="58dp"
-        android:text="Email Address"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="95dp"
-        android:layout_height="58dp"
-        android:text="Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.607"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
-
-        <ProgressBar
+    <ProgressBar
         android:layout_width="240dp"
         android:id="@+id/progressbar"
         android:layout_height="53dp"
@@ -138,6 +114,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.949"
         tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/ManagerPermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

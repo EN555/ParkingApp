@@ -1,7 +1,5 @@
 package com.example.myapp_1;
 
-import android.util.Patterns;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,6 +10,7 @@ import Exceptions.NotValidPhoneNumberException;
 
 public class User implements Serializable{
     private String phone, password, email, name;
+    private boolean is_manager;
 
     public User(){ }
 
@@ -28,6 +27,7 @@ public class User implements Serializable{
         this.password = password;
         this.email = email;
         this.name = name;
+        this.is_manager = false;
     }
 
     // getters
@@ -35,6 +35,7 @@ public class User implements Serializable{
     public String getPassword(){return this.password;}
     public String getEmail(){return this.email;}
     public String getName(){return this.name;}
+    public boolean getIsManager(){return this.is_manager;}
 
 
     @Override

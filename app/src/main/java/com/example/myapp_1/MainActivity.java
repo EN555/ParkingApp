@@ -12,6 +12,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button Register, Login, Forgot_Password;
     private EditText email, password;
+    private CheckBox manager_acc;
     private ProgressBar progressbar;
     private FirebaseAuth mAuth;
 
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         email = (EditText)findViewById(R.id.editEmailAddress);
         password = (EditText)findViewById(R.id.editPassword);
         progressbar = (ProgressBar)findViewById(R.id.progressbar);
+        manager_acc = (CheckBox) findViewById(R.id.ManagerPermission);
     }
 
     /**
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //--------------CONNECT TO THE SERVER------------------
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(@NonNull Task<AuthResult> task){
                 if(task.isSuccessful()){
                     progressbar.setVisibility(View.GONE);
                     if(mAuth.getCurrentUser().isEmailVerified()) {
@@ -133,8 +136,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 User us = snapshot.getValue(User.class);
-                                i.putExtra("user", us);     /* to-do : pass user data */
-                                startActivity(i);
+                                if(manager_acc.isChecked()) {
+                                    DatabaseReference manage_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid()+ "/isManager");
+                                    manage_ref.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            boolean is_manager = (boolean)snapshot.getValue();
+                                            if(is_manager) {
+                                                startActivity(new Intent(MainActivity.this, Manager.class));
+                                            }
+                                            else{
+                                                Toast.makeText(MainActivity.this, "you havn't manager access!", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    }
+                                else{
+                                    i.putExtra("user", us);     /* to-do : pass user data */
+                                    startActivity(i);
+                                }
                             }
 
                             @Override

@@ -13,7 +13,7 @@ import java.time.Instant;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener{
 
     private User user;
-    private Button search, publish, delete;
+    private Button search, publish, delete, LogOut;
     private EditText helloText;
 
     @Override
@@ -42,7 +42,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         this.search = (Button) findViewById(R.id.search);
         this.publish = (Button) findViewById(R.id.publish);
         this.delete = (Button) findViewById(R.id.delete);
-
+        this.LogOut = (Button) findViewById(R.id.logout);
         this.helloText = (EditText) findViewById(R.id.hello_text);
     }
 
@@ -53,6 +53,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         this.search.setOnClickListener(this);
         this.publish.setOnClickListener(this);
         this.delete.setOnClickListener(this);
+        this.LogOut.setOnClickListener(this);
     }
 
 
@@ -72,6 +73,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             case R.id.delete:
                 deleteButtonFunctionality();
                 break;
+            case R.id.logout:
+                log_out();
+                break;
         }
     }
 
@@ -88,5 +92,10 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         /* TODO: add functionality */
     }
 
+    private void log_out(){
+        Intent intent = new Intent(UserProfile.this, MainActivity.class);
+        startActivity(intent);
+        finish();  // This call is missing.
+    }
 
 }

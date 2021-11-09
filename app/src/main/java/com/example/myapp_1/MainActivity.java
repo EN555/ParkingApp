@@ -142,8 +142,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             boolean is_manager = (boolean)snapshot.getValue();
+                                            Intent j = new Intent(MainActivity.this, Manager.class);
                                             if(is_manager) {
-                                                startActivity(new Intent(MainActivity.this, Manager.class));
+                                                j.putExtra("us", us);     /* to-do : pass user data */
+                                                startActivity(j);
                                             }
                                             else{
                                                 Toast.makeText(MainActivity.this, "you havn't manager access!", Toast.LENGTH_LONG).show();

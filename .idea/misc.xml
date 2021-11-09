@@ -16,6 +16,13 @@
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_reset.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_reset_password.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_user_profile.xml" value="0.2857142857142857" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_manager.xml" value="0.29438405797101447" />
+        <entry key="app/src/main/res/layout/activity_manager3.xml" value="0.16354166666666667" />
+        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.29010416666666666" />
+        <entry key="app/src/main/res/layout/content_manager.xml" value="0.29438405797101447" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.29438405797101447" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.29438405797101447" />
       </map>
     </option>
   </component>

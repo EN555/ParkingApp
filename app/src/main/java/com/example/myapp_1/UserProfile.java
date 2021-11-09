@@ -2,10 +2,13 @@ package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.time.Instant;
 
 public class UserProfile extends AppCompatActivity implements View.OnClickListener{
 
@@ -74,13 +77,15 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
 
     private void SearchButtonFunctionality(){
-        /* to-do : add functionality */
+        /* TODO : add functionality */
     }
     private void publishButtonFunctionality(){
-        /* to-do : add functionality */
+        Intent i = new Intent(UserProfile.this, Publish.class);
+        i.putExtra("user", user);
+        startActivity(i);
     }
     private void deleteButtonFunctionality(){
-        /* to-do : add functionality */
+        /* TODO: add functionality */
     }
 
 

@@ -61,6 +61,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+<<<<<<< HEAD
+=======
+        android:hint="Email Address"
+        android:textAlignment="center"
+>>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,9 +81,9 @@
         android:layout_width="213dp"
         android:layout_height="56dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
@@ -106,6 +111,7 @@
         app:layout_constraintVertical_bias="0.306"
         tools:ignore="MissingConstraints" />
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/textView3"
         android:layout_width="193dp"
@@ -132,6 +138,10 @@
         app:layout_constraintVertical_bias="0.537" />
 
     <ProgressBar
+=======
+    <ProgressBar
+        android:layout_width="240dp"
+>>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         android:id="@+id/progressbar"
         android:layout_width="240dp"
         android:layout_height="53dp"
@@ -144,13 +154,19 @@
         app:layout_constraintVertical_bias="0.949"
         tools:ignore="MissingConstraints" />
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/manager"
+=======
+    <CheckBox
+        android:id="@+id/ManagerPermission"
+>>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -167,6 +183,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.152"
         app:srcCompat="@drawable/gif" />
+=======
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+>>>>>>> d6e3a814e278373c75471fdf7db86b2d67a06332
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

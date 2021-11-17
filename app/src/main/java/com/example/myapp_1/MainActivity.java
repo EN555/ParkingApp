@@ -97,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // get email and password from screen
         String str_email = email.getText().toString().trim();
         String str_password = password.getText().toString().trim();
+        // get email and password from screen
+        str_email = "lironi06@gmail.com";
+        str_password = "12345678";
 
 
         // check input
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         // try to log in
+
         validation(str_email, str_password);
     }
 

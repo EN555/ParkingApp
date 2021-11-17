@@ -13,7 +13,7 @@ import java.time.Instant;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener{
 
     private User user;
-    private Button search, publish, delete, LogOut;
+    private Button search, publish, delete, LogOut, activity;
     private EditText helloText;
 
     @Override
@@ -44,6 +44,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         this.delete = (Button) findViewById(R.id.delete);
         this.LogOut = (Button) findViewById(R.id.logout);
         this.helloText = (EditText) findViewById(R.id.hello_text);
+        this.activity = (Button) findViewById(R.id.activity1);
     }
 
     /**
@@ -54,6 +55,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         this.publish.setOnClickListener(this);
         this.delete.setOnClickListener(this);
         this.LogOut.setOnClickListener(this);
+        this.activity.setOnClickListener(this);
     }
 
 
@@ -75,6 +77,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.logout:
                 log_out();
+            case R.id.activity1:
+               // PostsDataBaseConnection.getAllPostsByCity("city");
+                startActivity(new Intent(this, feed_activity.class));
                 break;
         }
     }

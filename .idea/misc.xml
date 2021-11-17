@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/font/acme.xml" value="0.1390625" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/font/aladin.xml" value="0.14010416666666667" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/font/lobster.xml" value="0.14010416666666667" />
@@ -12,34 +13,30 @@
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_main.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_main2.xml" value="0.12571428571428572" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_main3.xml" value="0.10989583333333333" />
-<<<<<<< HEAD
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_register.xml" value="0.15639810426540285" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_reset.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_reset_password.xml" value="0.12552083333333333" />
-=======
-        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_manager.xml" value="0.12552083333333333" />
-        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_publish.xml" value="0.2857142857142857" />
-        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_register.xml" value="0.18857142857142858" />
-<<<<<<< HEAD
->>>>>>> 0eb0019a24f3698ff74a852c0c432cc40811645e
         <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_user_profile.xml" value="0.2857142857142857" />
+        <entry key="app/src/main/res/drawable/buttom_shape.xml" value="0.2911458333333333" />
+        <entry key="app/src/main/res/layout/activity_activtypost.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/activity_manager.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/activity_manager3.xml" value="0.16354166666666667" />
-        <entry key="app/src/main/res/layout/activity_publish.xml" value="0.29010416666666666" />
+        <entry key="app/src/main/res/layout/activity_manager_post.xml" value="0.275" />
+        <entry key="app/src/main/res/layout/activity_manager_users.xml" value="0.275" />
+        <entry key="app/src/main/res/layout/activity_publish.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/content_manager.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.29438405797101447" />
-=======
-        <entry key="..\:/Users/eviat/AndroidStudioProjects/MyApp_1/app/src/main/res/layout/activity_user_profile.xml" value="0.12571428571428572" />
-        <entry key="..\:/Users/nir son/AndroidStudioProjects/ParkingApp/app/src/main/res/layout/activity_main.xml" value="0.14427083333333332" />
-        <entry key="..\:/Users/nir son/AndroidStudioProjects/ParkingApp/app/src/main/res/layout/activity_publish.xml" value="0.3333333333333333" />
->>>>>>> 58ebe46ac537b50215333233fcb218028e21cd96
+        <entry key="app/src/main/res/layout/item_view.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/my_row.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/viewpost.xml" value="0.1" />
       </map>
     </option>
   </component>

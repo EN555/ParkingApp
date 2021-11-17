@@ -15,6 +15,7 @@
         android:fontFamily="@font/acme"
         android:text="Forgot Password?"
         android:textSize="15dp"
+        android:textColor="#ADD8E6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
@@ -30,6 +31,7 @@
         android:background="@android:color/darker_gray"
         android:fontFamily="@font/acme"
         android:text="Register"
+        android:textColor="#ADD8E6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +45,9 @@
         android:background="@android:color/darker_gray"
         android:fontFamily="@font/acme"
         android:text="Login"
+        android:textStyle="bold"
+        android:textColor="#ADD8E6"
+        android:textSize="25sp"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +104,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28"
+        app:layout_constraintVertical_bias="0.291"
         tools:ignore="MissingConstraints" />
 
     <ProgressBar
@@ -122,7 +127,7 @@
         android:text="Manager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
@@ -138,6 +143,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.122"
         app:srcCompat="@drawable/gif" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.819"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161"
+        app:srcCompat="@drawable/clipart2505838" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

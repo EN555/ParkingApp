@@ -18,6 +18,18 @@ public class PostsDataBaseConnection {
      */
     public static void uploadPost(Post post) {
         DataBase.getReference("Posts").child("" + post.hashCode()).setValue(post);
+        getAllPostsByCity("city");
+    }
+
+
+    /**
+     * getAllPostsByCity
+     * @param
+     */
+    public static void getAllPostsByCity(String city) {
+        String c = "ariel";
+        System.out.println(DataBase.getReference("Posts").get());
+
     }
 
 }

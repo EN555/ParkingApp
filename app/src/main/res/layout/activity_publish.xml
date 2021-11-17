@@ -4,128 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/_8484"
     tools:context=".Publish">
 
-    <EditText
-        android:id="@+id/timeTo"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:ems="10"
-        android:hint="at (hh:mm)"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <EditText
-        android:id="@+id/to"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="to (dd/mm/yyyy)"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/houseNumber"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-430dp"
-        android:hint="house number"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/price"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-320dp"
-        android:hint="price"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/street"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-540dp"
-        android:hint="street"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/city"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-650dp"
-        android:hint="city"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/from"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-200dp"
-        android:ems="10"
-        android:hint="from (dd/mm/yyyy)"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/timeFrom"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-70dp"
-        android:ems="10"
-        android:hint="at (hh:mm)"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/weakly"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:text="repete weakly?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/photo"
-        android:layout_width="180dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="450dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/upload" />
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/publishButton"
@@ -134,21 +22,110 @@
         android:text="publish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerView2"
+        app:layout_constraintVertical_bias="0.976" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@drawable/gif" />
+        android:id="@+id/photo"
+        android:layout_width="180dp"
+        android:layout_height="89dp"
+        app:layout_constraintBottom_toTopOf="@+id/publishButton"
+        app:layout_constraintEnd_toEndOf="@+id/publishButton"
+        app:srcCompat="@drawable/upload" />
+
+    <Switch
+        android:id="@+id/weakly"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="repete weakly?"
+        app:layout_constraintBottom_toTopOf="@+id/photo"
+        app:layout_constraintEnd_toEndOf="@+id/photo" />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:hint="city"
+        app:layout_constraintBottom_toTopOf="@+id/street"
+        app:layout_constraintEnd_toEndOf="@+id/street"
+        app:layout_constraintStart_toStartOf="@+id/street" />
+
+    <EditText
+        android:id="@+id/street"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:hint="street"
+        app:layout_constraintBottom_toTopOf="@+id/houseNumber"
+        app:layout_constraintEnd_toEndOf="@+id/houseNumber"
+        app:layout_constraintStart_toStartOf="@+id/houseNumber" />
+
+    <EditText
+        android:id="@+id/houseNumber"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="house number"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toTopOf="@+id/from"
+        app:layout_constraintEnd_toEndOf="@+id/from"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/from" />
+
+    <EditText
+        android:id="@+id/from"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="from (dd/mm/yyyy)"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/to"
+        app:layout_constraintEnd_toEndOf="@+id/to"
+        app:layout_constraintStart_toStartOf="@+id/to" />
+
+    <EditText
+        android:id="@+id/timeFrom"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="at (hh:mm)"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/timeTo"
+        app:layout_constraintEnd_toEndOf="@+id/timeTo"
+        app:layout_constraintStart_toStartOf="@+id/timeTo" />
+
+    <EditText
+        android:id="@+id/to"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="to (dd/mm/yyyy)"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/timeFrom"
+        app:layout_constraintEnd_toEndOf="@+id/timeFrom"
+        app:layout_constraintStart_toStartOf="@+id/timeFrom" />
+
+    <EditText
+        android:id="@+id/timeTo"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="at (hh:mm)"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/price"
+        app:layout_constraintEnd_toEndOf="@+id/price" />
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="price"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toTopOf="@+id/weakly"
+        app:layout_constraintEnd_toEndOf="@+id/weakly"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weakly" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -73,7 +73,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.publishButton:
-                publishButtonFunctionality();
+                startActivity(new Intent(this, feed_activity.class));
                 break;
             case R.id.photo:
                 pickPhoto();

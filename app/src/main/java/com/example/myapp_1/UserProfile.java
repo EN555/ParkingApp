@@ -77,6 +77,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.logout:
                 log_out();
+                break;
             case R.id.activity1:
                // PostsDataBaseConnection.getAllPostsByCity("city");
                 startActivity(new Intent(this, feed_activity.class));

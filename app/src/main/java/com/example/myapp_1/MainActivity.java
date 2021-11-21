@@ -1,39 +1,25 @@
 package com.example.myapp_1;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PatternMatcher;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import Intrfaces.LoginCaller;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoginCaller {
     private Button Register, Login, Forgot_Password;
     private EditText email, password;
     private CheckBox manager_acc;
     private ProgressBar progressbar;
-    private FirebaseAuth mAuth;
 
 
     @Override
@@ -43,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.GetElements();
         this.SetButtonsListeners();
-
-        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -115,77 +99,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         // try to log in
+        UsersDataBaseConnection.login(this, str_email, str_password, manager_acc.isChecked());
 
-        validation(str_email, str_password);
     }
 
 
     /**
-     * try to log in to the app, with the provided email and password
+     * finish login after validation
+     * @param user - the user's data. null if error
+     * @param type:
+     *            0 - normal login
+     *            1 - manager login
+     *            2 - data base connection error / no such user
+     *            3 - not validated email
+     *            4 - no manager access
      */
-    private void validation(String email, String password){
-
-
-        //--------------CONNECT TO THE SERVER------------------
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task){
-                if(task.isSuccessful()){
-                    progressbar.setVisibility(View.GONE);
-                    if(mAuth.getCurrentUser().isEmailVerified()) {
-                        Intent i = new Intent(MainActivity.this, UserProfile.class);
-                        FirebaseDatabase data_base = FirebaseDatabase.getInstance();
-                        DatabaseReference data_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid());
-                        data_ref.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                User us = snapshot.getValue(User.class);
-                                if(manager_acc.isChecked()) {
-                                    DatabaseReference manage_ref= data_base.getReference("Users/"+ mAuth.getInstance().getCurrentUser().getUid()+ "/isManager");
-                                    manage_ref.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            boolean is_manager = (boolean)snapshot.getValue();
-                                            Intent j = new Intent(MainActivity.this, Manager.class);
-                                            if(is_manager) {
-                                                j.putExtra("us", us);     /* to-do : pass user data */
-                                                startActivity(j);
-                                            }
-                                            else{
-                                                Toast.makeText(MainActivity.this, "you havn't manager access!", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                                else{
-                                    i.putExtra("user", us);     /* to-do : pass user data */
-                                    startActivity(i);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
-                    else{
-                        Toast.makeText(MainActivity.this, "verify your email Again!", Toast.LENGTH_LONG).show();
-                        progressbar.setVisibility(View.GONE);
-                    }
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "Please try Again!", Toast.LENGTH_LONG).show();
-                    progressbar.setVisibility(View.GONE);
-                }
-            }
-        });
-
+    @Override
+    public void finishLogin(User user, int type) {
+        progressbar.setVisibility(View.GONE);
+        switch (type){
+            // normal user
+            case 0:
+                Intent i = new Intent(MainActivity.this, UserProfile.class);
+                i.putExtra("user", user);
+                startActivity(i);
+                break;
+            // manager
+            case 1:
+                Intent j = new Intent(MainActivity.this, Manager.class);
+                j.putExtra("us", user);
+                startActivity(j);
+                break;
+            // error
+            case 2:
+                Toast.makeText(MainActivity.this, "Please try Again!", Toast.LENGTH_LONG).show();
+                break;
+            // not validated email
+            case 3:
+                Toast.makeText(MainActivity.this, "please verify your email!", Toast.LENGTH_LONG).show();
+                break;
+            case 4:
+            // no manager access
+                Toast.makeText(MainActivity.this, "you don't have manager access!", Toast.LENGTH_LONG).show();
+                break;
+            default:
+        }
     }
 
 }

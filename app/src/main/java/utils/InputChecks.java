@@ -1,4 +1,4 @@
-package com.example.myapp_1;
+package utils;
 
 import android.provider.ContactsContract;
 import android.util.Patterns;
@@ -15,7 +15,7 @@ public class InputChecks {
      * @param email
      * @return
      */
-    protected static boolean CheckValidEMail(String email){
+    public static boolean CheckValidEMail(String email){
         if(email == null || email.isEmpty()){return false;}
 
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -26,7 +26,7 @@ public class InputChecks {
      * @param password
      * @return
      */
-    protected static boolean CheckValidPassword(String password){
+    public static boolean CheckValidPassword(String password){
         if(password == null || password.isEmpty()){return false;}
 
         return password.length() >=6;
@@ -37,7 +37,7 @@ public class InputChecks {
      * @param phoneNumber
      * @return
      */
-    protected static boolean CheckValidPhoneNumber(String phoneNumber){
+    public static boolean CheckValidPhoneNumber(String phoneNumber){
         if(phoneNumber == null || phoneNumber.isEmpty()){return false;}
 
         return Patterns.PHONE.matcher(phoneNumber).matches();
@@ -48,14 +48,14 @@ public class InputChecks {
      * @param name
      * @return
      */
-    protected static boolean CheckValidName(String name){
+    public static boolean CheckValidName(String name){
         if(name == null || name.isEmpty()){return false;}
 
         return name.length() >=2 && !name.matches(".*\\d.*");
     }
 
 
-    protected static boolean isValidData(String date){
+    public static boolean isValidData(String date){
 
         if(!date.matches("[0-3][0-9]/[0-1][0-9]/[0-9][0-9][0-9][0-9]")){ return false; }
 
@@ -65,7 +65,7 @@ public class InputChecks {
 
         return true;
     }
-    protected static boolean isValidTime(String time){
+    public static boolean isValidTime(String time){
         if(!time.matches("[0-2][0-9]:[0-5][0-9]")){ return false; }
 
         String[] dmy = time.split(":");

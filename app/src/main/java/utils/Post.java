@@ -1,22 +1,22 @@
-package com.example.myapp_1;
+package utils;
 
 
-import android.graphics.Matrix;
+import android.net.Uri;
 
 import java.util.Objects;
 
 public class Post{
 
     private String city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo;
-    private Matrix photo;
+    private Uri photo;
     private boolean weakly;
-    private  User user;
+    private User user;
     private double price;
     public Post(){ }
 
     public Post(String city, String street, String houseNum, double price,
                 String dataFrom, String timeFrom, String dateTo, String timeTo,
-                Matrix photo, boolean weakly, User user) {
+                Uri photo, boolean weakly, User user) {
         this.city = city;
         this.street = street;
         this.houseNum = houseNum;
@@ -39,7 +39,7 @@ public class Post{
     public String getTimeFrom() { return timeFrom; }
     public String getDateTo() { return dateTo; }
     public String getTimeTo() { return timeTo; }
-    public Matrix getPhoto() { return photo; }
+    public Uri getPhoto() { return photo; }
     public boolean isWeakly() { return weakly; }
     public User getUser() { return user; }
     @Override

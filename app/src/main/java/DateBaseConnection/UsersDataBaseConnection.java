@@ -1,4 +1,4 @@
-package com.example.myapp_1;
+package DateBaseConnection;
 
 import androidx.annotation.NonNull;
 
@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import Intrfaces.LoginCaller;
 import Intrfaces.UserAdder;
+import utils.User;
 
 public class UsersDataBaseConnection {
 

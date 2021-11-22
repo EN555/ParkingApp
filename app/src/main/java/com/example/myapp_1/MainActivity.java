@@ -11,9 +11,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
+import DateBaseConnection.UsersDataBaseConnection;
 import Intrfaces.LoginCaller;
+import utils.InputChecks;
+import utils.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoginCaller {
     private Button Register, Login, Forgot_Password;

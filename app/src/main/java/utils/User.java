@@ -1,4 +1,4 @@
-package com.example.myapp_1;
+package utils;
 
 import java.io.Serializable;
 import java.util.Objects;

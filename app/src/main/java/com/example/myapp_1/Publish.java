@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,8 +15,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import DateBaseConnection.PostsDataBaseConnection;
+import Intrfaces.PostUploader;
+import utils.InputChecks;
+import utils.Post;
+import utils.User;
 
-public class Publish extends AppCompatActivity implements View.OnClickListener {
+
+public class Publish extends AppCompatActivity implements View.OnClickListener, PostUploader {
 
     private TextView city, street, houseNum;
     private EditText price, dataFrom, timeFrom, dateTo, timeTo;
@@ -26,6 +31,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
     private Button publish;
     private  User user;
 
+    private Uri object_photo;
 
 
     @Override
@@ -104,7 +110,8 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
                 str_timeFrom = timeFrom.getText().toString().trim(),
                 str_timeTo = timeTo.getText().toString().trim();
         double num_price = Double.parseDouble(price.getText().toString().trim());
-        Matrix object_photo = photo.getImageMatrix();
+//        Matrix object_photo = photo.getImageMatrix();
+
         boolean isWeakly = weakly.isChecked();
 
         // input check
@@ -136,16 +143,9 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
                 object_photo, isWeakly, user);
 
         // upload post
-        PostsDataBaseConnection.uploadPost(post); // TODO: add checks for good upload
+        PostsDataBaseConnection.uploadPost(this, post);
 
-        //TODO: add option for weakly upload
-
-        Toast.makeText(Publish.this, "post uploaded", Toast.LENGTH_LONG).show();
-
-        // back to user profile
-        Intent i = new Intent(Publish.this, UserProfile.class);
-        i.putExtra("user", user);
-        startActivity(i);
+        // TODO: add option for weekly upload
 
     }
 
@@ -157,10 +157,25 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
         if(requestCode == 1 && resultCode == RESULT_OK && data != null){
             Uri selectedPhoto = data.getData();
             photo.setImageURI(selectedPhoto);
+            this.object_photo = selectedPhoto;
         }
 
     }
 
+    @Override
+    public void uploaded(boolean isSuccessful) {
+        if (isSuccessful){
+            Toast.makeText(Publish.this, "post uploaded", Toast.LENGTH_LONG).show();
+
+            // back to user profile
+            Intent i = new Intent(Publish.this, UserProfile.class);
+            i.putExtra("user", user);
+            startActivity(i);
+        }
+        else {
+            Toast.makeText(Publish.this, "could not upload post", Toast.LENGTH_LONG).show();
+        }
+    }
 }
 
 

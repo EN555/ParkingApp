@@ -39,7 +39,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
      * get all elements on the screen (Buttons, texts, ...) as objects of the class
      */
     private void GetElements(){
-        this.search = (Button) findViewById(R.id.searchButton);
+        this.search = (Button) findViewById(R.id.searchButtonF);
         this.publish = (Button) findViewById(R.id.publish);
         this.delete = (Button) findViewById(R.id.delete);
         this.LogOut = (Button) findViewById(R.id.logout);
@@ -66,7 +66,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.searchButton:
+            case R.id.searchButtonF:
                 SearchButtonFunctionality();
                 break;
             case R.id.publish:
@@ -87,7 +87,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
 
     private void SearchButtonFunctionality(){
-        /* TODO : add functionality */
+        startActivity(new Intent(UserProfile.this, Search.class));
     }
     private void publishButtonFunctionality(){
         Intent i = new Intent(UserProfile.this, Publish.class);

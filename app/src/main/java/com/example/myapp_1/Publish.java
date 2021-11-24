@@ -1,9 +1,8 @@
 package com.example.myapp_1;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
+import java.io.IOException;
 
 import DateBaseConnection.PostsDataBaseConnection;
 import Intrfaces.PostUploader;
@@ -31,7 +36,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     private Button publish;
     private  User user;
 
-    private Uri object_photo;
+    private Bitmap object_photo = BitmapFactory.decodeFile("@drawable/upload");
 
 
     @Override
@@ -79,7 +84,8 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.publishButton:
-                startActivity(new Intent(this, feed_activity.class));
+//                startActivity(new Intent(this, feed_activity.class));
+                publishButtonFunctionality();
                 break;
             case R.id.photo:
                 pickPhoto();
@@ -138,9 +144,11 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
 
 
         // create post
+        int[] image = new int[this.object_photo.getWidth() * this.object_photo.getHeight()];
+        this.object_photo.getPixels(image, 0, 0,0, 0, object_photo.getWidth(), object_photo.getHeight());
         Post post = new Post(str_city, str_street, str_houseNum, num_price,
                 str_dateFrom, str_timeFrom, str_dateTo, str_timeTo,
-                object_photo, isWeakly, user);
+                image, object_photo.getWidth(), object_photo.getWidth(), isWeakly, user);
 
         // upload post
         PostsDataBaseConnection.uploadPost(this, post);
@@ -157,7 +165,11 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
         if(requestCode == 1 && resultCode == RESULT_OK && data != null){
             Uri selectedPhoto = data.getData();
             photo.setImageURI(selectedPhoto);
-            this.object_photo = selectedPhoto;
+
+
+            try {
+                this.object_photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedPhoto);
+            } catch (IOException e) { e.printStackTrace(); }
         }
 
     }

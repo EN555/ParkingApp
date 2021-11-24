@@ -3,6 +3,7 @@ package com.example.myapp_1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -110,7 +111,8 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         price.setText("" + currentPost.getPrice());
         phoneNum.setText("" + currentPost.getPrice());
 
-        photo.setImageURI(currentPost.getPhoto());
+        photo.setImageBitmap(Bitmap.createBitmap(currentPost.getPhoto(), currentPost.getPhotoW(),
+                currentPost.getPhotoH(), Bitmap.Config.ARGB_8888));
     }
 
 

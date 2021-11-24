@@ -12,6 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import Intrfaces.PostUploader;
@@ -26,7 +28,8 @@ public class PostsDataBaseConnection {
 
     /**
      * upload a new post to the data base
-     * @param post
+     * @param post - post to upload
+     * @param calledFrom - where the method was called, to notify when finished
      */
     public static void uploadPost(PostUploader calledFrom, Post post) {
         DataBase.getReference("Posts").child("" + post.hashCode()).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -48,16 +51,30 @@ public class PostsDataBaseConnection {
 //
 //    }
 
+
+    /**
+     *
+     * @param calledFrom - where the method was called, to notify when finished
+     * @param values - values to search by
+     */
     public static void search(SearchCaller calledFrom, Map<SearchFields, String> values){
 
-            DataBase.getReference("posts").addListenerForSingleValueEvent(new ValueEventListener() {
+            DataBase.getReference("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Map<String, Post> allPosts = (Map<String, Post>) snapshot.getValue();
+
+                    List<Post> allPosts = new LinkedList<>();
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        allPosts.add(snapshot1.getValue(Post.class));
+                    }
+
+
+//                    Map<String, Post> allPosts = (Map<String, Post>) snapshot.getValue();   // get all posts
 
                     ArrayList<Post> posts = new ArrayList<>();
 
-                    for(Post p : allPosts.values()){
+                    // go through all the posts and search according to the given values
+                    for(Post p : allPosts){
                         boolean b = true;
                         for(Map.Entry<SearchFields, String> entry : values.entrySet()){
                             switch (entry.getKey()){

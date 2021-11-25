@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String str_email = email.getText().toString().trim();
         String str_password = password.getText().toString().trim();
 
-//        // DEBUG
-//        str_email = "lironi06@gmail.com";
-//        str_password = "12345678";
-//        // END DEBUG
+        // DEBUG
+        str_email = "lironi06@gmail.com";
+        str_password = "12345678";
+        // END DEBUG
 
         // check input
         if(!InputChecks.CheckValidEMail(str_email)){

@@ -1,22 +1,29 @@
 package utils;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class Post{
+public class Post implements Serializable {
 
     private String city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo;
-    private int[] photo;
+//    private int[] photo;
+    private List<Integer> photo;
     private int photoW, photoH;
     private boolean weakly;
     private User user;
     private double price;
     public Post(){ }
 
+    @SuppressLint("NewApi")
     public Post(String city, String street, String houseNum, double price,
                 String dataFrom, String timeFrom, String dateTo, String timeTo,
                 int[] photo, int photoW, int photoH, boolean weakly, User user) {
@@ -28,7 +35,7 @@ public class Post{
         this.timeFrom = timeFrom;
         this.dateTo = dateTo;
         this.timeTo = timeTo;
-        this.photo = photo.clone();
+        this.photo = Arrays.stream(photo).boxed().collect(Collectors.toList());
         this.photoW = photoW;
         this.photoH = photoH;
         this.weakly = weakly;
@@ -44,7 +51,7 @@ public class Post{
     public String getTimeFrom() { return timeFrom; }
     public String getDateTo() { return dateTo; }
     public String getTimeTo() { return timeTo; }
-    public int[] getPhoto() { return photo; }
+    public List<Integer> getPhoto() { return photo; }
     public int getPhotoW() { return photoW; }
     public int getPhotoH() { return photoH; }
     public boolean isWeakly() { return weakly; }
@@ -61,15 +68,12 @@ public class Post{
                 Objects.equals(street, post.street) && Objects.equals(houseNum, post.houseNum) &&
                 Objects.equals(dataFrom, post.dataFrom) && Objects.equals(timeFrom, post.timeFrom) &&
                 Objects.equals(dateTo, post.dateTo) && Objects.equals(timeTo, post.timeTo) &&
-                Arrays.equals(photo, post.photo) && Objects.equals(user, post.user);
+                Objects.equals(photo, post.photo) && Objects.equals(user, post.user);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo,
-                photoW, photoH, weakly, user, price);
-        result = 31 * result + Arrays.hashCode(photo);
-        return result;
+        return Objects.hash(city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo, photo, photoW, photoH, weakly, user, price);
     }
 
     @Override
@@ -82,7 +86,7 @@ public class Post{
                 ", timeFrom='" + timeFrom + '\'' +
                 ", dateTo='" + dateTo + '\'' +
                 ", timeTo='" + timeTo + '\'' +
-                ", photo=" + Arrays.toString(photo) +
+                ", photo=" + photo.toString() +
                 ", photoW=" + photoW +
                 ", photoH=" + photoH +
                 ", weakly=" + weakly +

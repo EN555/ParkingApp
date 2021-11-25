@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.primitives.Ints;
+
 import java.util.ArrayList;
 
 import utils.Post;
@@ -80,7 +82,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
      *  set the screen to the next post
      */
     private void nextPost(){
-        if(currentPostIndex == posts.size() + 1){return;}
+        if(currentPostIndex == posts.size()){return;}
 
         Post currentPost = posts.get(currentPostIndex);
         setViewToPost(currentPost);
@@ -92,9 +94,9 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
     private void prevPost(){
         if(currentPostIndex <= 1){return;}
 
-        currentPostIndex -= 2;
+        currentPostIndex--;
 
-        Post currentPost = posts.get(currentPostIndex);
+        Post currentPost = posts.get(currentPostIndex - 1);
         setViewToPost(currentPost);
     }
 
@@ -107,11 +109,11 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         street.setText(currentPost.getStreet());
         houseNum.setText(currentPost.getHouseNum());
         from.setText(currentPost.getDataFrom() + "  :  " +currentPost.getTimeFrom());
-        to.setText(currentPost.getTimeTo() + "  :  " +currentPost.getTimeTo());
+        to.setText(currentPost.getDateTo() + "  :  " +currentPost.getTimeTo());
         price.setText("" + currentPost.getPrice());
-        phoneNum.setText("" + currentPost.getPrice());
+        phoneNum.setText(currentPost.getUser().getPhone());
 
-        photo.setImageBitmap(Bitmap.createBitmap(currentPost.getPhoto(), currentPost.getPhotoW(),
+        photo.setImageBitmap(Bitmap.createBitmap(Ints.toArray(currentPost.getPhoto()), currentPost.getPhotoW(),
                 currentPost.getPhotoH(), Bitmap.Config.ARGB_8888));
     }
 
@@ -121,8 +123,10 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()){
             case R.id.Next:
+                nextPost();
                 break;
             case  R.id.Prev:
+                prevPost();
                 break;
         }
 

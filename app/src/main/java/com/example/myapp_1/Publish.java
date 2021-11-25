@@ -36,11 +36,18 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     private Button publish;
     private  User user;
 
-    private Bitmap object_photo = BitmapFactory.decodeFile("@drawable/upload");
+    private Bitmap object_photo = Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888);
+            //BitmapFactory.decodeFileDescriptor(R.drawable.gif);
+            //tmapFactory.decodeFile("app/src/main/res/drawable/gif.jpeg");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //DEBUG
+            System.out.println("photo init : " + this.object_photo);
+        //END DEBUG
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
 
@@ -52,6 +59,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
         if (extras != null) {
             this.user = (User)extras.getSerializable("user");
         }
+
     }
 
     /**
@@ -145,7 +153,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
 
         // create post
         int[] image = new int[this.object_photo.getWidth() * this.object_photo.getHeight()];
-        this.object_photo.getPixels(image, 0, 0,0, 0, object_photo.getWidth(), object_photo.getHeight());
+        this.object_photo.getPixels(image, 0, object_photo.getWidth(),0, 0, object_photo.getWidth(), object_photo.getHeight());
         Post post = new Post(str_city, str_street, str_houseNum, num_price,
                 str_dateFrom, str_timeFrom, str_dateTo, str_timeTo,
                 image, object_photo.getWidth(), object_photo.getWidth(), isWeakly, user);

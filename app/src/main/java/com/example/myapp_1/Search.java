@@ -70,7 +70,6 @@ public class Search extends AppCompatActivity implements SearchCaller, View.OnCl
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.searchButtonF){
-            System.out.println("here1");
             this.searchButtonFunctionality();
         }
     }
@@ -79,7 +78,6 @@ public class Search extends AppCompatActivity implements SearchCaller, View.OnCl
      * get data from screen and search for posts
      */
     private void searchButtonFunctionality(){
-        System.out.println("here2");
         String[] data = getDataFromScreen();    // get data for screen
 
         // input checks
@@ -103,7 +101,6 @@ public class Search extends AppCompatActivity implements SearchCaller, View.OnCl
         if(!data[4].equals("")){searchFor.put(SearchFields.MAXPRICSE, data[0]);}
 
         // search
-        System.out.println("here3");
         PostsDataBaseConnection.search(this, searchFor);
     }
 

@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // try to log in
         UsersDataBaseConnection.login(this, str_email, str_password, manager_acc.isChecked());
-
     }
 
 

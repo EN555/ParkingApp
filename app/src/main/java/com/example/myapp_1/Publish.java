@@ -44,10 +44,6 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //DEBUG
-            System.out.println("photo init : " + this.object_photo);
-        //END DEBUG
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
 

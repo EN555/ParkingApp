@@ -16,55 +16,71 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassword extends AppCompatActivity {
+import DateBaseConnection.UsersDataBaseConnection;
+import Intrfaces.PasswordReseter;
+import utils.InputChecks;
+
+public class ForgotPassword extends AppCompatActivity implements PasswordReseter {
 
     private EditText Email;
     private Button Reset;
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        GetElements();
+        SetButtonsListeners();
+    }
+
+    /**
+     * get all elements on the screen (Buttons, texts, ...) as objects of the class
+     */
+    private void GetElements(){
         Email = (EditText) findViewById(R.id._email);
         Reset = (Button) findViewById(R.id._verify);
+    }
 
+    /**
+     * set all button listeners
+     */
+    private void SetButtonsListeners() {
         Reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reset_password();
             }
         });
+    }
+
+    /**
+     * send email to reset the password
+     */
+    public void reset_password(){
+
+        // input check
+        String email = Email.getText().toString().trim();
+        if(!InputChecks.CheckValidEMail(email)){
+            Email.setError("not a valid email!");
+            Email.requestFocus();
+            return;
+        }
+
+        // reset
+        UsersDataBaseConnection.passwordReset(this, email);
 
     }
 
-    public void reset_password(){
-        String email = Email.getText().toString().trim();
-        if(email.isEmpty()){
-            Email.setError("Email is Required!");
-            Email.requestFocus();
-            return;
+    @Override
+    public void onResetResults(boolean result) {
+        if(result){
+            Toast.makeText(ForgotPassword.this, "check your email to reset password", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(ForgotPassword.this, MainActivity.class));
         }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Email.setError("The email not exist!");
-            Email.requestFocus();
-            return;
+        else {
+            Toast.makeText(ForgotPassword.this, "Try Again!", Toast.LENGTH_LONG).show();
         }
-
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(ForgotPassword.this, "check your email to reset password", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(ForgotPassword.this, MainActivity.class));
-                }
-                else{
-                    Toast.makeText(ForgotPassword.this, "Try Again!", Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
     }
 }

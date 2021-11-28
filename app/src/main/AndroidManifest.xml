@@ -13,9 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp_1"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".userlist"
             android:exported="false" />
+        <activity
+            android:name=".Search"
+            android:exported="false" />
+        <activity
+            android:name=".NoResults"
+            android:exported="false" />
+        <activity
+            android:name=".SearchResults"
+            android:exported="false" />
+
         <activity
             android:name=".feed_activity"
             android:exported="false" />
@@ -30,9 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".Publish"
-            android:exported="false" />
-        <activity
-            android:name=".ManagerActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ForgotPassword"
@@ -42,9 +51,6 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -1,6 +1,6 @@
 package Intrfaces;
 
-import com.example.myapp_1.User;
+import utils.User;
 
 public interface LoginCaller {
     void finishLogin(User user, int type);

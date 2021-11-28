@@ -1,22 +1,32 @@
-package com.example.myapp_1;
+package utils;
 
 
-import android.graphics.Matrix;
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.net.Uri;
 
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class Post{
+public class Post implements Serializable {
 
     private String city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo;
-    private Matrix photo;
+//    private int[] photo;
+    private List<Integer> photo;
+    private int photoW, photoH;
     private boolean weakly;
-    private  User user;
+    private User user;
     private double price;
     public Post(){ }
 
+    @SuppressLint("NewApi")
     public Post(String city, String street, String houseNum, double price,
                 String dataFrom, String timeFrom, String dateTo, String timeTo,
-                Matrix photo, boolean weakly, User user) {
+                int[] photo, int photoW, int photoH, boolean weakly, User user) {
         this.city = city;
         this.street = street;
         this.houseNum = houseNum;
@@ -25,7 +35,9 @@ public class Post{
         this.timeFrom = timeFrom;
         this.dateTo = dateTo;
         this.timeTo = timeTo;
-        this.photo = photo;
+        this.photo = Arrays.stream(photo).boxed().collect(Collectors.toList());
+        this.photoW = photoW;
+        this.photoH = photoH;
         this.weakly = weakly;
         this.user = user;
     }
@@ -39,24 +51,29 @@ public class Post{
     public String getTimeFrom() { return timeFrom; }
     public String getDateTo() { return dateTo; }
     public String getTimeTo() { return timeTo; }
-    public Matrix getPhoto() { return photo; }
+    public List<Integer> getPhoto() { return photo; }
+    public int getPhotoW() { return photoW; }
+    public int getPhotoH() { return photoH; }
     public boolean isWeakly() { return weakly; }
     public User getUser() { return user; }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Post)) return false;
         Post post = (Post) o;
-        return weakly == post.weakly && Objects.equals(city, post.city) &&
+        return photoW == post.photoW && photoH == post.photoH && weakly == post.weakly &&
+                Double.compare(post.price, price) == 0 && Objects.equals(city, post.city) &&
                 Objects.equals(street, post.street) && Objects.equals(houseNum, post.houseNum) &&
-                Objects.equals(price, post.price) && Objects.equals(dataFrom, post.dataFrom) &&
-                Objects.equals(timeFrom, post.timeFrom) && Objects.equals(dateTo, post.dateTo) &&
-                Objects.equals(timeTo, post.timeTo) && Objects.equals(photo, post.photo);
+                Objects.equals(dataFrom, post.dataFrom) && Objects.equals(timeFrom, post.timeFrom) &&
+                Objects.equals(dateTo, post.dateTo) && Objects.equals(timeTo, post.timeTo) &&
+                Objects.equals(photo, post.photo) && Objects.equals(user, post.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo, photo, weakly, user, price);
+        return Objects.hash(city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo, photo, photoW, photoH, weakly, user, price);
     }
 
     @Override
@@ -65,14 +82,16 @@ public class Post{
                 "city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", houseNum='" + houseNum + '\'' +
-                ", price='" + price + '\'' +
                 ", dataFrom='" + dataFrom + '\'' +
                 ", timeFrom='" + timeFrom + '\'' +
                 ", dateTo='" + dateTo + '\'' +
                 ", timeTo='" + timeTo + '\'' +
-                ", photo=" + photo +
+                ", photo=" + photo.toString() +
+                ", photoW=" + photoW +
+                ", photoH=" + photoH +
                 ", weakly=" + weakly +
                 ", user=" + user +
+                ", price=" + price +
                 '}';
     }
 }

@@ -11,9 +11,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
+import DateBaseConnection.UsersDataBaseConnection;
 import Intrfaces.LoginCaller;
+import utils.InputChecks;
+import utils.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoginCaller {
     private Button Register, Login, Forgot_Password;
@@ -81,26 +82,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // get email and password from screen
         String str_email = email.getText().toString().trim();
         String str_password = password.getText().toString().trim();
-        // get email and password from screen
+
+        // DEBUG
         str_email = "lironi06@gmail.com";
         str_password = "12345678";
-
+        // END DEBUG
 
         // check input
         if(!InputChecks.CheckValidEMail(str_email)){
             email.setError("Invalid Email!");
             email.requestFocus();
+            this.progressbar.setVisibility(View.GONE);
             return;
         }
         if(!InputChecks.CheckValidPassword(str_password)){
             password.setError("Invalid Password!");
             password.requestFocus();
+            this.progressbar.setVisibility(View.GONE);
             return;
         }
 
         // try to log in
         UsersDataBaseConnection.login(this, str_email, str_password, manager_acc.isChecked());
-
     }
 
 

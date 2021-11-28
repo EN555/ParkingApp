@@ -1,10 +1,8 @@
 package com.example.myapp_1;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Matrix;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,8 +14,20 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class Publish extends AppCompatActivity implements View.OnClickListener {
+import java.io.File;
+import java.io.IOException;
+
+import DateBaseConnection.PostsDataBaseConnection;
+import Intrfaces.PostUploader;
+import utils.InputChecks;
+import utils.Post;
+import utils.User;
+
+
+public class Publish extends AppCompatActivity implements View.OnClickListener, PostUploader {
 
     private TextView city, street, houseNum;
     private EditText price, dataFrom, timeFrom, dateTo, timeTo;
@@ -26,10 +36,14 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
     private Button publish;
     private  User user;
 
+    private Bitmap object_photo = Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888);
+            //BitmapFactory.decodeFileDescriptor(R.drawable.gif);
+            //tmapFactory.decodeFile("app/src/main/res/drawable/gif.jpeg");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
 
@@ -41,6 +55,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
         if (extras != null) {
             this.user = (User)extras.getSerializable("user");
         }
+
     }
 
     /**
@@ -73,7 +88,8 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.publishButton:
-                startActivity(new Intent(this, feed_activity.class));
+//                startActivity(new Intent(this, feed_activity.class));
+                publishButtonFunctionality();
                 break;
             case R.id.photo:
                 pickPhoto();
@@ -104,7 +120,8 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
                 str_timeFrom = timeFrom.getText().toString().trim(),
                 str_timeTo = timeTo.getText().toString().trim();
         double num_price = Double.parseDouble(price.getText().toString().trim());
-        Matrix object_photo = photo.getImageMatrix();
+//        Matrix object_photo = photo.getImageMatrix();
+
         boolean isWeakly = weakly.isChecked();
 
         // input check
@@ -131,21 +148,16 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
 
 
         // create post
+        int[] image = new int[this.object_photo.getWidth() * this.object_photo.getHeight()];
+        this.object_photo.getPixels(image, 0, object_photo.getWidth(),0, 0, object_photo.getWidth(), object_photo.getHeight());
         Post post = new Post(str_city, str_street, str_houseNum, num_price,
                 str_dateFrom, str_timeFrom, str_dateTo, str_timeTo,
-                object_photo, isWeakly, user);
+                image, object_photo.getWidth(), object_photo.getWidth(), isWeakly, user);
 
         // upload post
-        PostsDataBaseConnection.uploadPost(post); // TODO: add checks for good upload
+        PostsDataBaseConnection.uploadPost(this, post);
 
-        //TODO: add option for weakly upload
-
-        Toast.makeText(Publish.this, "post uploaded", Toast.LENGTH_LONG).show();
-
-        // back to user profile
-        Intent i = new Intent(Publish.this, UserProfile.class);
-        i.putExtra("user", user);
-        startActivity(i);
+        // TODO: add option for weekly upload
 
     }
 
@@ -157,10 +169,29 @@ public class Publish extends AppCompatActivity implements View.OnClickListener {
         if(requestCode == 1 && resultCode == RESULT_OK && data != null){
             Uri selectedPhoto = data.getData();
             photo.setImageURI(selectedPhoto);
+
+
+            try {
+                this.object_photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedPhoto);
+            } catch (IOException e) { e.printStackTrace(); }
         }
 
     }
 
+    @Override
+    public void uploaded(boolean isSuccessful) {
+        if (isSuccessful){
+            Toast.makeText(Publish.this, "post uploaded", Toast.LENGTH_LONG).show();
+
+            // back to user profile
+            Intent i = new Intent(Publish.this, UserProfile.class);
+            i.putExtra("user", user);
+            startActivity(i);
+        }
+        else {
+            Toast.makeText(Publish.this, "could not upload post", Toast.LENGTH_LONG).show();
+        }
+    }
 }
 
 

@@ -1,4 +1,4 @@
-package com.example.myapp_1;
+package utils;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,7 +10,7 @@ import Exceptions.NotValidPhoneNumberException;
 
 public class User implements Serializable{
     private String phone, password, email, name;
-    private boolean is_manager;
+    private boolean isManager;
 
     public User(){ }
 
@@ -27,7 +27,7 @@ public class User implements Serializable{
         this.password = password;
         this.email = email;
         this.name = name;
-        this.is_manager = false;
+        this.isManager = false;
     }
 
     // getters
@@ -35,7 +35,7 @@ public class User implements Serializable{
     public String getPassword(){return this.password;}
     public String getEmail(){return this.email;}
     public String getName(){return this.name;}
-    public boolean getIsManager(){return this.is_manager;}
+    public boolean getIsManager(){return this.isManager;}
 
 
 
@@ -56,7 +56,8 @@ public class User implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(phone, user.phone) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(name, user.name);
+        return Objects.equals(phone, user.phone) && Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email) && Objects.equals(name, user.name);
     }
 
 

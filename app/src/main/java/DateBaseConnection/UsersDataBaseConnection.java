@@ -1,7 +1,12 @@
-package com.example.myapp_1;
+package DateBaseConnection;
+
+import android.content.Intent;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapp_1.ForgotPassword;
+import com.example.myapp_1.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -13,7 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import Intrfaces.LoginCaller;
+import Intrfaces.PasswordReseter;
 import Intrfaces.UserAdder;
+import utils.User;
 
 public class UsersDataBaseConnection {
 
@@ -82,7 +89,7 @@ public class UsersDataBaseConnection {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 User us = snapshot.getValue(User.class);
                                 if (manager) {
-                                    if (us.getIsManager()==false) {
+                                    if (us.getIsManager()) {
                                         calledFrom.finishLogin(us, 1);
                                     } else {
                                         calledFrom.finishLogin(null, 4);
@@ -104,6 +111,19 @@ public class UsersDataBaseConnection {
                 else{
                     calledFrom.finishLogin(null, 2);
                 }
+            }
+        });
+    }
+
+    /**
+     * send a email to reset the password
+     * @param calledFrom
+     */
+    public static void passwordReset(PasswordReseter calledFrom, String email){
+        DataBaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                calledFrom.onResetResults(task.isSuccessful());
             }
         });
     }

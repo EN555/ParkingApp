@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.time.Instant;
+import utils.User;
 
 public class UserProfile extends AppCompatActivity implements View.OnClickListener{
 
@@ -39,7 +39,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
      * get all elements on the screen (Buttons, texts, ...) as objects of the class
      */
     private void GetElements(){
-        this.search = (Button) findViewById(R.id.search);
+        this.search = (Button) findViewById(R.id.searchButtonF);
         this.publish = (Button) findViewById(R.id.publish);
         this.delete = (Button) findViewById(R.id.delete);
         this.LogOut = (Button) findViewById(R.id.logout);
@@ -66,7 +66,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.search:
+            case R.id.searchButtonF:
                 SearchButtonFunctionality();
                 break;
             case R.id.publish:
@@ -78,16 +78,16 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             case R.id.logout:
                 log_out();
                 break;
-            case R.id.activity1:
-               // PostsDataBaseConnection.getAllPostsByCity("city");
-                startActivity(new Intent(this, feed_activity.class));
-                break;
+//            case R.id.activity1:
+//               // PostsDataBaseConnection.getAllPostsByCity("city");
+//                startActivity(new Intent(this, feed_activity.class));
+//                break;
         }
     }
 
 
     private void SearchButtonFunctionality(){
-        /* TODO : add functionality */
+        startActivity(new Intent(UserProfile.this, Search.class));
     }
     private void publishButtonFunctionality(){
         Intent i = new Intent(UserProfile.this, Publish.class);

@@ -82,7 +82,7 @@ public class UsersDataBaseConnection {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 User us = snapshot.getValue(User.class);
                                 if (manager) {
-                                    if (us.getIsManager()) {
+                                    if (us.getIsManager()==false) {
                                         calledFrom.finishLogin(us, 1);
                                     } else {
                                         calledFrom.finishLogin(null, 4);

@@ -15,41 +15,34 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class feed_activity extends AppCompatActivity {
+public class userlist extends AppCompatActivity {
+
     RecyclerView recyclerView;
     DatabaseReference database;
     MyAdapter_users myAdapter;
-    String s1[], s2[];
-    int image[] = {R.drawable.gif};
-    ArrayList<Post> list;
+    ArrayList<UserManager> list;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+        setContentView(R.layout.activity_userlist);
 
-        recyclerView = findViewById(R.id.recycler);
-
-        s1 = getResources().getStringArray(R.array.activty_post);
-        s2 = getResources().getStringArray(R.array.description);
-
-        database = FirebaseDatabase.getInstance().getReference("Post");
+        recyclerView = findViewById(R.id.userlist);
+        database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-
-        MyAdaptor myAdaptor = new MyAdaptor(this, list);
-        recyclerView.setAdapter(myAdaptor);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new MyAdapter_users(this,list);
+        recyclerView.setAdapter(myAdapter);
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Post post = dataSnapshot.getValue(Post.class);
-                    list.add(post);
+                    UserManager user = dataSnapshot.getValue(UserManager.class);
+                    list.add(user);
                 }
                 myAdapter.notifyDataSetChanged();
 
@@ -59,9 +52,7 @@ public class feed_activity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
         });
-
 
     }
 }

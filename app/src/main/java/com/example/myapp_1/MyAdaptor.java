@@ -10,16 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class MyAdaptor extends RecyclerView.Adapter<MyAdaptor.MyViewHolder> {
 
-    String data1[], data2[];
-    int images[];
     Context context;
-    public MyAdaptor(Context ct, String s1[], String s2[], int img[]){
+    ArrayList<Post> posts;
+    public MyAdaptor(Context ct,ArrayList<Post> list ){
         context = ct;
-        data1 = s1;
-        data2 = s2;
-        images = img;
+       posts=list;
 
     }
     @NonNull
@@ -32,16 +31,16 @@ public class MyAdaptor extends RecyclerView.Adapter<MyAdaptor.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.myText1.setText(data1[position]);
-        holder.myText2.setText(data2[position]);
-        holder.myImage.setImageResource(images[position]);
+        Post post = posts.get(position);
+        holder.myText1.setText(post.getCity());
+        holder.myText2.setText(post.getStreet());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return posts.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -38,6 +38,7 @@ public class User implements Serializable{
     public boolean getIsManager(){return this.is_manager;}
 
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -47,6 +48,8 @@ public class User implements Serializable{
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -42,7 +42,7 @@ public class Manager extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(Manager.this, managerPost.class));
             break;
         case R.id.button2:
-            startActivity(new Intent(Manager.this, managerUsers.class));
+            startActivity(new Intent(Manager.this, userlist.class));
             break;
     }
     }

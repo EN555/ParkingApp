@@ -3,5 +3,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/acme</item>
         <item name="fontFamily">@font/acme</item>
+
+
+
     </style>
 </resources>

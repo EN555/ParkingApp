@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@color/black"
     app:cardCornerRadius="8dp"
-    android:layout_margin="16dp">
+    app:cardElevation="8dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize">
@@ -18,18 +20,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/gif2"
+                android:layout_centerVertical="true"
                 android:padding="15dp"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/gif2" />
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="417dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical"
-        android:background="@drawable/gradient_background">
+        android:background="@drawable/gradient_background"
+        android:orientation="vertical">
+
         <ImageView
             android:id="@+id/myimageview"
             android:layout_width="50dp"
@@ -54,7 +56,7 @@
                 android:text="Name: "
                 android:textColor="@color/black"
                 android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvfirstName"
@@ -62,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="arya"
                 android:textColor="@color/black"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -78,7 +80,7 @@
                 android:text="Email: "
                 android:textColor="@color/black"
                 android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvlastName"
@@ -86,13 +88,12 @@
                 android:layout_height="wrap_content"
                 android:text="arya"
                 android:textColor="@color/black"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
 
 
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

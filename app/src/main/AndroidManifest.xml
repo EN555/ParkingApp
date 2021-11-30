@@ -31,9 +31,6 @@
             android:name=".feed_activity"
             android:exported="false" />
         <activity
-            android:name=".managerUsers"
-            android:exported="false" />
-        <activity
             android:name=".managerPost"
             android:exported="false" />
         <activity

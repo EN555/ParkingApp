@@ -17,6 +17,7 @@ import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.primit
 
 import java.util.ArrayList;
 
+import utils.InputChecks;
 import utils.Post;
 
 public class SearchResults extends AppCompatActivity implements View.OnClickListener {
@@ -111,12 +112,12 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
 
         final Dialog dialog = new Dialog(SearchResults.this);
         dialog.setContentView(R.layout.activity_email_pass_dialog);
+
+        // adapt dialog window to screen size
         int width = (int)(getResources().getDisplayMetrics().widthPixels*0.70);
         int height = (int)(getResources().getDisplayMetrics().heightPixels*0.40);
 
         dialog.getWindow().setLayout(width, height);
-        dialog.setTitle("Title");
-
         final EditText email_sender = dialog.findViewById(R.id.email);
         final EditText password_sender = dialog.findViewById(R.id.password);
         Button submitButton = dialog.findViewById(R.id.report);
@@ -124,19 +125,32 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 String em_send = email_sender.getText().toString();
+                // email validation
+                if(!InputChecks.CheckValidEMail(em_send)){
+                    email_sender.getText().clear();
+                    email_sender.setHint("Invalid email!");
+                    return;
+                }
+                // password validation
                 String pass_send = password_sender.getText().toString();
+                if(!InputChecks.CheckValidPassword(pass_send)){
+                    password_sender.getText().clear();
+                    password_sender.setHint("Invalid password!");
+                    return;
+                }
+                // send the message
                         Thread sender = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
         GMailSender sender = new GMailSender(em_send, pass_send);
             sender.sendMail("EmailSender App",
-                    "This post suspect as spam , his details" +" city: " + city.getText().toString() + " street: " + street.getText().toString() + " house number: " + houseNum.getText().toString() + " price: " + price.getText().toString() + " phone number: " + phoneNum.getText().toString(),
+                    "This post suspect as spam,\nHis Details:" +"\nCity: " + city.getText().toString() + "\nStreet: " + street.getText().toString() + "\nHouse Number: " + houseNum.getText().toString() + "\nPrice: " + price.getText().toString() + "\nPhone Number: " + phoneNum.getText().toString(),
                     em_send,
                     "eviatarn@gmail.com");
                     dialog.dismiss();
                 } catch (Exception e) {
-                    e.printStackTrace();                }
+                    e.printStackTrace();}
             }
         });
         sender.start();

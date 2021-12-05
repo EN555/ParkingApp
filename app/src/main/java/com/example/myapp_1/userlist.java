@@ -14,8 +14,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class userlist extends AppCompatActivity {
+import DateBaseConnection.UsersDataBaseConnection;
+import Intrfaces.UsersGetter;
+
+public class userlist extends AppCompatActivity implements UsersGetter {
 
     RecyclerView recyclerView;
     DatabaseReference database;
@@ -37,22 +41,30 @@ public class userlist extends AppCompatActivity {
         myAdapter = new MyAdapter_users(this,list);
         recyclerView.setAdapter(myAdapter);
 
-        database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UserManager user = dataSnapshot.getValue(UserManager.class);
-                    list.add(user);
-                }
-                myAdapter.notifyDataSetChanged();
+        UsersDataBaseConnection.getAllUsers(this);
 
-            }
+//        database.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    UserManager user = dataSnapshot.getValue(UserManager.class);
+//                    list.add(user);
+//                }
+//                myAdapter.notifyDataSetChanged();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+    }
 
-            }
-        });
-
+    @Override
+    public void gotUsers(List<UserManager> users) {
+        this.list.addAll(users);
+        myAdapter.notifyDataSetChanged();
     }
 }

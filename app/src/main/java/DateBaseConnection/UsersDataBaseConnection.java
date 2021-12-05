@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.example.myapp_1.ForgotPassword;
 import com.example.myapp_1.MainActivity;
+import com.example.myapp_1.UserManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -17,9 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import Intrfaces.LoginCaller;
 import Intrfaces.PasswordReseter;
 import Intrfaces.UserAdder;
+import Intrfaces.UsersGetter;
 import utils.User;
 
 public class UsersDataBaseConnection {
@@ -125,6 +130,29 @@ public class UsersDataBaseConnection {
             public void onComplete(@NonNull Task<Void> task) {
                 calledFrom.onResetResults(task.isSuccessful());
             }
+        });
+    }
+
+
+    /**
+     * get all registered users
+     * @param calledFrom
+     */
+    public static void getAllUsers(UsersGetter calledFrom){
+
+        List<UserManager> usersList = new LinkedList<>();
+
+        DataBase.getReference("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    UserManager user = dataSnapshot.getValue(UserManager.class);
+                    usersList.add(user);
+                }
+                calledFrom.gotUsers(usersList);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
 

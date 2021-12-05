@@ -22,8 +22,7 @@ import utils.User;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener, SearchCaller {
 
     private User user;
-//    private Button search, publish, delete, LogOut;
-    private CardView search1, publish1, delete1, Logout1;
+    private CardView search, publish, delete, Logout;
     private EditText helloText;
 
     @Override
@@ -51,29 +50,21 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
      * get all elements on the screen (Buttons, texts, ...) as objects of the class
      */
     private void GetElements(){
-//        this.search = (Button) findViewById(R.id.searchButtonF);
-//        this.publish = (Button) findViewById(R.id.publish);
-//        this.delete = (Button) findViewById(R.id.delete);
-//        this.LogOut = (Button) findViewById(R.id.logout);
         this.helloText = (EditText) findViewById(R.id.hello_text);
-        this.delete1 = (CardView) findViewById(R.id.cardDelete);
-        this.search1 = (CardView) findViewById(R.id.cardSearch);
-        this.publish1 = (CardView) findViewById(R.id.cardUploud);
-        this.Logout1 = (CardView) findViewById(R.id.cardLogOut);
+        this.delete = (CardView) findViewById(R.id.cardDelete);
+        this.search = (CardView) findViewById(R.id.cardSearch);
+        this.publish = (CardView) findViewById(R.id.cardUploud);
+        this.Logout = (CardView) findViewById(R.id.cardLogOut);
     }
 
     /**
      * set all button listeners
      */
     private void SetButtonsListeners(){
-//        this.search.setOnClickListener(this);
-//        this.publish.setOnClickListener(this);
-//        this.delete.setOnClickListener(this);
-//        this.LogOut.setOnClickListener(this);
-        this.search1.setOnClickListener(this);
-        this.publish1.setOnClickListener(this);
-        this.delete1.setOnClickListener(this);
-        this.Logout1.setOnClickListener(this);
+        this.search.setOnClickListener(this);
+        this.publish.setOnClickListener(this);
+        this.delete.setOnClickListener(this);
+        this.Logout.setOnClickListener(this);
     }
 
 
@@ -84,18 +75,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-//            case R.id.searchButtonF:
-//                SearchButtonFunctionality();
-//                break;
-//            case R.id.publish:
-//                publishButtonFunctionality();
-//                break;
-//            case R.id.delete:
-//                deleteButtonFunctionality();
-//                break;
-//            case R.id.logout:
-//                log_out();
-//                break;
             case R.id.cardSearch:
                 SearchButtonFunctionality();
                 break;

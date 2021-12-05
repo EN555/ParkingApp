@@ -8,9 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+
+import DateBaseConnection.PostsDataBaseConnection;
+import Intrfaces.SearchCaller;
+import utils.Post;
+import utils.SearchFields;
 import utils.User;
 
-public class UserProfile extends AppCompatActivity implements View.OnClickListener{
+public class UserProfile extends AppCompatActivity implements View.OnClickListener, SearchCaller {
 
     private User user;
     private Button search, publish, delete, LogOut;
@@ -89,7 +97,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         startActivity(i);
     }
     private void deleteButtonFunctionality(){
-        /* TODO: add functionality */
+        Map<SearchFields, String> forSearch = Collections.singletonMap(SearchFields.EMAIL, user.getEmail());
+        PostsDataBaseConnection.search(this, forSearch);
     }
 
     private void log_out(){
@@ -98,4 +107,10 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         finish();  // This call is missing.
     }
 
+    @Override
+    public void gotSearchResults(ArrayList<Post> posts) {
+        Intent i = new Intent(UserProfile.this, com.example.myapp_1.delete.class);
+        i.putExtra("postsList", posts);
+        startActivity(i);
+    }
 }

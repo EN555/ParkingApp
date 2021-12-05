@@ -16,6 +16,7 @@ import DateBaseConnection.PostsDataBaseConnection;
 import Intrfaces.SearchCaller;
 import utils.InputChecks;
 import utils.Post;
+import utils.SearchFields;
 
 public class Search extends AppCompatActivity implements SearchCaller, View.OnClickListener {
 

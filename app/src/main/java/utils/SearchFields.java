@@ -1,4 +1,4 @@
-package com.example.myapp_1;
+package utils;
 
 public enum SearchFields {
 
@@ -6,5 +6,6 @@ public enum SearchFields {
     STREET,
     DATEFROM,
     DATETO,
-    MAXPRICSE
+    MAXPRICSE,
+    EMAIL
 }

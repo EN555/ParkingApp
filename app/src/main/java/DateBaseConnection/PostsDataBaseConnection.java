@@ -2,12 +2,13 @@ package DateBaseConnection;
 
 import androidx.annotation.NonNull;
 
-import com.example.myapp_1.SearchFields;
+import utils.SearchFields;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import Intrfaces.PostRemover;
 import Intrfaces.PostUploader;
 import Intrfaces.SearchCaller;
 import utils.Post;
@@ -32,24 +34,14 @@ public class PostsDataBaseConnection {
      * @param calledFrom - where the method was called, to notify when finished
      */
     public static void uploadPost(PostUploader calledFrom, Post post) {
-        DataBase.getReference("Posts").child("" + post.hashCode()).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+        DataBase.getReference("Posts").child("" + post.hashCode()).
+                setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                   calledFrom.uploaded(task.isSuccessful());
             }
         });
     }
-
-//
-//    /**
-//     * getAllPostsByCity
-//     * @param
-//     */
-//    public static void getAllPostsByCity(String city) {
-//        String c = "ariel";
-//        System.out.println(DataBase.getReference("Posts").get());
-//
-//    }
 
 
     /**
@@ -68,8 +60,6 @@ public class PostsDataBaseConnection {
                         allPosts.add(snapshot1.getValue(Post.class));
                     }
 
-
-//                    Map<String, Post> allPosts = (Map<String, Post>) snapshot.getValue();   // get all posts
 
                     ArrayList<Post> posts = new ArrayList<>();
 
@@ -93,7 +83,9 @@ public class PostsDataBaseConnection {
                                 case MAXPRICSE:
                                     b &= p.getPrice() < Integer.parseInt(values.get(SearchFields.MAXPRICSE));
                                     break;
-
+                                case EMAIL:
+                                    b &= p.getUser().getEmail().equalsIgnoreCase(values.get(SearchFields.EMAIL));
+                                    break;
                             }
                         }
                         if (b){ posts.add(p); }
@@ -106,6 +98,51 @@ public class PostsDataBaseConnection {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
+    }
+
+    /**
+     * delete a post from the data base
+     * @param calledFrom
+     * @param toRemove
+     */
+    public static void deletePost(PostRemover calledFrom, Post toRemove){
+
+        DataBase.getReference("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    if(snap.getValue(Post.class).equals(toRemove)){
+                        snap.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                calledFrom.postRemoved(task.isSuccessful());
+                            }
+                        });
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+
+
+//        DataBase.getReference("Posts").orderByChild("ID").equalTo(toRemove.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot ds : snapshot.getChildren()) {
+//                    ds.getRef().removeValue();
+//                    calledFrom.postRemoved(true);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                calledFrom.postRemoved(false);
+//            }
+//        });
+
     }
 
 

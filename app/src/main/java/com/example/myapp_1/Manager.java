@@ -1,13 +1,11 @@
 package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import utils.User;
 
 public class Manager extends AppCompatActivity implements View.OnClickListener {
@@ -39,8 +37,8 @@ public class Manager extends AppCompatActivity implements View.OnClickListener {
      */
     private void GetElements() {
         hello = (TextView) findViewById(R.id.hello_text1);
-        post = (Button) findViewById(R.id.button);
-        users = (Button) findViewById(R.id.button2);
+        post = (Button) findViewById(R.id.post);
+        users = (Button) findViewById(R.id.user);
     }
 
     /**
@@ -54,10 +52,10 @@ public class Manager extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button:
+            case R.id.post:
                 startActivity(new Intent(Manager.this, managerPost.class));
                 break;
-            case R.id.button2:
+            case R.id.user:
                 startActivity(new Intent(Manager.this, userlist.class));
                 break;
 

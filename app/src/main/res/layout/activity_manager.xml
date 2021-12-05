@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/gif" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/post"
         android:layout_width="223dp"
         android:layout_height="64dp"
         android:text="Posts"
@@ -31,7 +31,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/user"
         android:layout_width="228dp"
         android:layout_height="54dp"
         android:text="Users"

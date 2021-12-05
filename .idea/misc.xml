@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/drawable/textview.xml" value="0.1648148148148148" />
         <entry key="app/src/main/res/layout/activity_activtypost.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.1887031408308004" />
+        <entry key="app/src/main/res/layout/activity_email_pass_dialog.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.26313405797101447" />

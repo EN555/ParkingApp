@@ -40,18 +40,6 @@ public class PostsDataBaseConnection {
         });
     }
 
-//
-//    /**
-//     * getAllPostsByCity
-//     * @param
-//     */
-//    public static void getAllPostsByCity(String city) {
-//        String c = "ariel";
-//        System.out.println(DataBase.getReference("Posts").get());
-//
-//    }
-
-
     /**
      *
      * @param calledFrom - where the method was called, to notify when finished
@@ -67,9 +55,6 @@ public class PostsDataBaseConnection {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         allPosts.add(snapshot1.getValue(Post.class));
                     }
-
-
-//                    Map<String, Post> allPosts = (Map<String, Post>) snapshot.getValue();   // get all posts
 
                     ArrayList<Post> posts = new ArrayList<>();
 

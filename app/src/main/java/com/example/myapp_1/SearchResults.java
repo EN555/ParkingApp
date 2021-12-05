@@ -2,11 +2,14 @@ package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,13 +17,14 @@ import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.primit
 
 import java.util.ArrayList;
 
+import utils.InputChecks;
 import utils.Post;
 
 public class SearchResults extends AppCompatActivity implements View.OnClickListener {
 
     TextView city, street, houseNum, from, to, price, phoneNum;
     ImageView photo;
-    Button next, prev;
+    Button next, prev, spam;
 
     ArrayList<Post> posts;
     int currentPostIndex;
@@ -67,6 +71,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
 
         this.next = findViewById(R.id.Next);
         this.prev = findViewById(R.id.Prev);
+        this.spam = findViewById(R.id.reportspam);
     }
 
 
@@ -76,6 +81,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
     private void SetButtonsListeners(){
         next.setOnClickListener(this);
         prev.setOnClickListener(this);
+        spam.setOnClickListener(this);
     }
 
     /**
@@ -99,7 +105,61 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         Post currentPost = posts.get(currentPostIndex - 1);
         setViewToPost(currentPost);
     }
+    /**
+     *  send manger mail for post spam
+     */
+    private void spamRep(){
 
+        final Dialog dialog = new Dialog(SearchResults.this);
+        dialog.setContentView(R.layout.activity_email_pass_dialog);
+
+        // adapt dialog window to screen size
+        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.70);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.40);
+
+        dialog.getWindow().setLayout(width, height);
+        final EditText email_sender = dialog.findViewById(R.id.email);
+        final EditText password_sender = dialog.findViewById(R.id.password);
+        Button submitButton = dialog.findViewById(R.id.report);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String em_send = email_sender.getText().toString();
+                // email validation
+                if(!InputChecks.CheckValidEMail(em_send)){
+                    email_sender.getText().clear();
+                    email_sender.setHint("Invalid email!");
+                    return;
+                }
+                // password validation
+                String pass_send = password_sender.getText().toString();
+                if(!InputChecks.CheckValidPassword(pass_send)){
+                    password_sender.getText().clear();
+                    password_sender.setHint("Invalid password!");
+                    return;
+                }
+                // send the message
+                        Thread sender = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+        GMailSender sender = new GMailSender(em_send, pass_send);
+            sender.sendMail("EmailSender App",
+                    "This post suspect as spam,\nHis Details:" +"\nCity: " + city.getText().toString() + "\nStreet: " + street.getText().toString() + "\nHouse Number: " + houseNum.getText().toString() + "\nPrice: " + price.getText().toString() + "\nPhone Number: " + phoneNum.getText().toString(),
+                    em_send,
+                    "eviatarn@gmail.com");
+                    dialog.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();}
+            }
+        });
+        sender.start();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
     /**
      * set the text on the screen to the given Post
      * @param currentPost
@@ -127,6 +187,9 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
                 break;
             case  R.id.Prev:
                 prevPost();
+                break;
+            case  R.id.reportspam:
+                spamRep();
                 break;
         }
 

@@ -42,8 +42,6 @@ public class PostsDataBaseConnection {
             }
         });
     }
-
-
     /**
      *
      * @param calledFrom - where the method was called, to notify when finished
@@ -59,7 +57,6 @@ public class PostsDataBaseConnection {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         allPosts.add(snapshot1.getValue(Post.class));
                     }
-
 
                     ArrayList<Post> posts = new ArrayList<>();
 

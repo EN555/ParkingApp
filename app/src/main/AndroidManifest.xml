@@ -17,6 +17,9 @@
             android:name=".delete"
             android:exported="false" />
         <activity
+            android:name=".EmailPassDialog"
+            android:exported="false" />
+        <activity
             android:name=".userlist"
             android:exported="false" />
         <activity
@@ -27,9 +30,6 @@
             android:exported="false" />
         <activity
             android:name=".SearchResults"
-            android:exported="false" />
-        <activity
-            android:name=".feed_activity"
             android:exported="false" />
         <activity
             android:name=".managerPost"

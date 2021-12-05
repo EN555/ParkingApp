@@ -96,10 +96,10 @@ public class Search extends AppCompatActivity implements SearchCaller, View.OnCl
         // put search values in a map
         Map<SearchFields, String> searchFor = new HashMap<>();
         if(!data[0].equals("")){searchFor.put(SearchFields.CITY, data[0]);}
-        if(!data[1].equals("")){searchFor.put(SearchFields.STREET, data[0]);}
-        if(!data[2].equals("")){searchFor.put(SearchFields.DATEFROM, data[0]);}
-        if(!data[3].equals("")){searchFor.put(SearchFields.DATETO, data[0]);}
-        if(!data[4].equals("")){searchFor.put(SearchFields.MAXPRICSE, data[0]);}
+        if(!data[1].equals("")){searchFor.put(SearchFields.STREET, data[1]);}
+        if(!data[2].equals("")){searchFor.put(SearchFields.DATEFROM, data[2]);}
+        if(!data[3].equals("")){searchFor.put(SearchFields.DATETO, data[3]);}
+        if(!data[4].equals("")){searchFor.put(SearchFields.MAXPRICSE, data[4]);}
 
         // search
         PostsDataBaseConnection.search(this, searchFor);

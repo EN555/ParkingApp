@@ -72,13 +72,13 @@ public class PostsDataBaseConnection {
                                     b &= p.getStreet().equalsIgnoreCase(values.get(SearchFields.STREET));
                                     break;
                                 case DATEFROM:
-                                    b &= Utils.CompareDateStrings(p.getDataFrom(), values.get(SearchFields.DATEFROM)) <= 0;
+                                    b &= Utils.CompareDateStrings(p.getDataFrom(), values.get(SearchFields.DATEFROM)) >= 0;
                                     break;
                                 case DATETO:
-                                    b &= Utils.CompareDateStrings(p.getDateTo(), values.get(SearchFields.DATETO)) >= 0;
+                                    b &= Utils.CompareDateStrings(p.getDateTo(), values.get(SearchFields.DATETO)) <= 0;
                                     break;
                                 case MAXPRICSE:
-                                    b &= p.getPrice() < Integer.parseInt(values.get(SearchFields.MAXPRICSE));
+                                    b &= p.getPrice() <= Integer.parseInt(values.get(SearchFields.MAXPRICSE));
                                     break;
                                 case EMAIL:
                                     b &= p.getUser().getEmail().equalsIgnoreCase(values.get(SearchFields.EMAIL));

@@ -1,6 +1,7 @@
 package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,8 @@ import utils.User;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener{
 
     private User user;
-    private Button search, publish, delete, LogOut;
+//    private Button search, publish, delete, LogOut;
+    private CardView search1, publish1, delete1, Logout1;
     private EditText helloText;
 
     @Override
@@ -33,27 +35,37 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         // set text to say hello to the user
         helloText.setText("hello " + user.getName());
 
+
+
     }
 
     /**
      * get all elements on the screen (Buttons, texts, ...) as objects of the class
      */
     private void GetElements(){
-        this.search = (Button) findViewById(R.id.searchButtonF);
-        this.publish = (Button) findViewById(R.id.publish);
-        this.delete = (Button) findViewById(R.id.delete);
-        this.LogOut = (Button) findViewById(R.id.logout);
+//        this.search = (Button) findViewById(R.id.searchButtonF);
+//        this.publish = (Button) findViewById(R.id.publish);
+//        this.delete = (Button) findViewById(R.id.delete);
+//        this.LogOut = (Button) findViewById(R.id.logout);
         this.helloText = (EditText) findViewById(R.id.hello_text);
+        this.delete1 = (CardView) findViewById(R.id.cardDelete);
+        this.search1 = (CardView) findViewById(R.id.cardSearch);
+        this.publish1 = (CardView) findViewById(R.id.cardUploud);
+        this.Logout1 = (CardView) findViewById(R.id.cardLogOut);
     }
 
     /**
      * set all button listeners
      */
     private void SetButtonsListeners(){
-        this.search.setOnClickListener(this);
-        this.publish.setOnClickListener(this);
-        this.delete.setOnClickListener(this);
-        this.LogOut.setOnClickListener(this);
+//        this.search.setOnClickListener(this);
+//        this.publish.setOnClickListener(this);
+//        this.delete.setOnClickListener(this);
+//        this.LogOut.setOnClickListener(this);
+        this.search1.setOnClickListener(this);
+        this.publish1.setOnClickListener(this);
+        this.delete1.setOnClickListener(this);
+        this.Logout1.setOnClickListener(this);
     }
 
 
@@ -64,18 +76,32 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.searchButtonF:
+//            case R.id.searchButtonF:
+//                SearchButtonFunctionality();
+//                break;
+//            case R.id.publish:
+//                publishButtonFunctionality();
+//                break;
+//            case R.id.delete:
+//                deleteButtonFunctionality();
+//                break;
+//            case R.id.logout:
+//                log_out();
+//                break;
+            case R.id.cardSearch:
                 SearchButtonFunctionality();
                 break;
-            case R.id.publish:
+            case R.id.cardUploud:
                 publishButtonFunctionality();
                 break;
-            case R.id.delete:
+
+            case R.id.cardDelete:
                 deleteButtonFunctionality();
                 break;
-            case R.id.logout:
+            case R.id.cardLogOut:
                 log_out();
                 break;
+
         }
     }
 

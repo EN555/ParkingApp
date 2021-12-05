@@ -36,11 +36,11 @@
         <entry key="app/src/main/res/layout/activity_manager_post.xml" value="0.275" />
         <entry key="app/src/main/res/layout/activity_manager_users.xml" value="0.275" />
         <entry key="app/src/main/res/layout/activity_no_results.xml" value="0.24895833333333334" />
-        <entry key="app/src/main/res/layout/activity_publish.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_publish.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.24895833333333334" />
-        <entry key="app/src/main/res/layout/activity_search_results.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.29010416666666666" />
+        <entry key="app/src/main/res/layout/activity_search_results.xml" value="0.2629655732639539" />
+        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_userlist.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_manager.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.29438405797101447" />

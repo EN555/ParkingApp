@@ -19,7 +19,7 @@ import DateBaseConnection.PostsDataBaseConnection;
 import Intrfaces.PostRemover;
 import utils.Post;
 
-public class delete extends AppCompatActivity implements View.OnClickListener, PostRemover {
+public class Delete extends AppCompatActivity implements View.OnClickListener, PostRemover {
 
     TextView city, street, houseNum, from, to, price, phoneNum;
     ImageView photo;
@@ -48,7 +48,7 @@ public class delete extends AppCompatActivity implements View.OnClickListener, P
             nextPost();
         }
         else{
-            startActivity(new Intent(com.example.myapp_1.delete.this, NoResults.class));
+            startActivity(new Intent(Delete.this, NoResults.class));
         }
 
     }
@@ -82,7 +82,7 @@ public class delete extends AppCompatActivity implements View.OnClickListener, P
 //        //DEBUG
 //        System.out.println("next = " + next);
 //        System.out.println("prev = " + prev);
-//        System.out.println("delete = " + delete);
+//        System.out.println("Delete = " + Delete);
 //
 //        System.out.println("city = " + city);
 //        System.out.println("photo = " + photo);
@@ -133,7 +133,7 @@ public class delete extends AppCompatActivity implements View.OnClickListener, P
     }
 
     /**
-     * delete the current displayed post
+     * Delete the current displayed post
      */
     private void DeletePost(){
         Post postToDelete = this.posts.get(currentPostIndex - 1);
@@ -142,7 +142,7 @@ public class delete extends AppCompatActivity implements View.OnClickListener, P
         if(currentPostIndex == 1){
             // if removed last post
             if(this.posts.size() == 1){
-                startActivity(new Intent(delete.this , NoResults.class));
+                startActivity(new Intent(Delete.this , NoResults.class));
             }
             else {
                 nextPost();
@@ -165,10 +165,10 @@ public class delete extends AppCompatActivity implements View.OnClickListener, P
     @Override
     public void postRemoved(boolean isSuccessful) {
         if(!isSuccessful){
-            Toast.makeText(com.example.myapp_1.delete.this, "an error occurred!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Delete.this, "an error occurred!", Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(com.example.myapp_1.delete.this, "post successfully removed", Toast.LENGTH_LONG).show();
+            Toast.makeText(Delete.this, "post successfully removed", Toast.LENGTH_LONG).show();
         }
     }
 

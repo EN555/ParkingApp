@@ -1,13 +1,7 @@
 package DateBaseConnection;
 
-import android.content.Intent;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
-import com.example.myapp_1.ForgotPassword;
-import com.example.myapp_1.MainActivity;
-import com.example.myapp_1.UserManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -140,13 +134,13 @@ public class UsersDataBaseConnection {
      */
     public static void getAllUsers(UsersGetter calledFrom){
 
-        List<UserManager> usersList = new LinkedList<>();
+        List<User> usersList = new LinkedList<>();
 
         DataBase.getReference("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UserManager user = dataSnapshot.getValue(UserManager.class);
+                    User user = dataSnapshot.getValue(User.class);
                     usersList.add(user);
                 }
                 calledFrom.gotUsers(usersList);

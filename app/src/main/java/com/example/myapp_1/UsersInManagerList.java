@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import utils.User;
+
 public class UsersInManagerList extends RecyclerView.Adapter<UsersInManagerList.MyViewHolder1> {
 
 
     Context context;
 
-    ArrayList<UserManager> list;
+    ArrayList<User> list;
 
-    public UsersInManagerList(Context context, ArrayList<UserManager> list) {
+    public UsersInManagerList(Context context, ArrayList<User> list) {
         this.context = context;
         this.list = list;
     }
@@ -32,7 +34,7 @@ public class UsersInManagerList extends RecyclerView.Adapter<UsersInManagerList.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder1 holder, int position) {
-        UserManager user = list.get(position);
+        User user = list.get(position);
         holder.firstName.setText(user.getName());
         holder.email.setText(user.getEmail());
 

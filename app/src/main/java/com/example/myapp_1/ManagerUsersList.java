@@ -14,13 +14,14 @@ import java.util.List;
 
 import DateBaseConnection.UsersDataBaseConnection;
 import Intrfaces.UsersGetter;
+import utils.User;
 
-public class userlist extends AppCompatActivity implements UsersGetter {
+public class ManagerUsersList extends AppCompatActivity implements UsersGetter {
 
     RecyclerView recyclerView;
     DatabaseReference database;
     UsersInManagerList myAdapter;
-    ArrayList<UserManager> list;
+    ArrayList<User> list;
 
 
     @Override
@@ -41,7 +42,7 @@ public class userlist extends AppCompatActivity implements UsersGetter {
     }
 
     @Override
-    public void gotUsers(List<UserManager> users) {
+    public void gotUsers(List<User> users) {
         this.list.addAll(users);
         myAdapter.notifyDataSetChanged();
     }

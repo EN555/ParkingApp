@@ -14,13 +14,13 @@
         android:theme="@style/Theme.MyApp_1"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".delete"
+            android:name=".Delete"
             android:exported="false" />
         <activity
             android:name=".EmailPassDialog"
             android:exported="false" />
         <activity
-            android:name=".userlist"
+            android:name=".ManagerUsersList"
             android:exported="false" />
         <activity
             android:name=".Search"

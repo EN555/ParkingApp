@@ -6,7 +6,6 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -114,7 +113,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void gotSearchResults(ArrayList<Post> posts) {
-        Intent i = new Intent(UserProfile.this, com.example.myapp_1.delete.class);
+        Intent i = new Intent(UserProfile.this, Delete.class);
         i.putExtra("postsList", posts);
         startActivity(i);
     }

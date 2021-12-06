@@ -56,7 +56,7 @@ public class Manager extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(Manager.this, managerPost.class));
                 break;
             case R.id.user:
-                startActivity(new Intent(Manager.this, userlist.class));
+                startActivity(new Intent(Manager.this, ManagerUsersList.class));
                 break;
 
         }

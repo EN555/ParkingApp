@@ -98,7 +98,7 @@ public class PostsDataBaseConnection {
     }
 
     /**
-     * delete a post from the data base
+     * Delete a post from the data base
      * @param calledFrom
      * @param toRemove
      */
@@ -124,21 +124,6 @@ public class PostsDataBaseConnection {
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
-
-
-//        DataBase.getReference("Posts").orderByChild("ID").equalTo(toRemove.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot ds : snapshot.getChildren()) {
-//                    ds.getRef().removeValue();
-//                    calledFrom.postRemoved(true);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                calledFrom.postRemoved(false);
-//            }
-//        });
 
     }
 

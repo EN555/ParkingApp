@@ -40,7 +40,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         SetButtonsListeners();
 
         // set text to say hello to the user
-        helloText.setText("hello " + user.getName());
+        helloText.setText("Hello " + user.getName());
 
 
 

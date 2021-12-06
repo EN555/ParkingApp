@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter_users extends RecyclerView.Adapter<MyAdapter_users.MyViewHolder1> {
+public class UsersInManagerList extends RecyclerView.Adapter<UsersInManagerList.MyViewHolder1> {
 
 
     Context context;
 
     ArrayList<UserManager> list;
 
-    public MyAdapter_users(Context context, ArrayList<UserManager> list) {
+    public UsersInManagerList(Context context, ArrayList<UserManager> list) {
         this.context = context;
         this.list = list;
     }

@@ -88,7 +88,6 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.publishButton:
-//                startActivity(new Intent(this, feed_activity.class));
                 publishButtonFunctionality();
                 break;
             case R.id.photo:
@@ -120,7 +119,6 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
                 str_timeFrom = timeFrom.getText().toString().trim(),
                 str_timeTo = timeTo.getText().toString().trim();
         double num_price = Double.parseDouble(price.getText().toString().trim());
-//        Matrix object_photo = photo.getImageMatrix();
 
         boolean isWeakly = weakly.isChecked();
 

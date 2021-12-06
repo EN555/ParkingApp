@@ -45,7 +45,6 @@ public class Search extends AppCompatActivity implements SearchCaller, View.OnCl
         this.from = findViewById(R.id.dateFromF);
         this.to = findViewById(R.id.datetoF);
         this.maxPrice = findViewById(R.id.maxPriceF);
-
         this.search = findViewById(R.id.searchButtonF);
 
     }

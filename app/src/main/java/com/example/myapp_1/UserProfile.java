@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         SetButtonsListeners();
 
         // set text to say hello to the user
+        helloText.setTypeface(null, Typeface.BOLD);
         helloText.setText("Hello " + user.getName());
 
 

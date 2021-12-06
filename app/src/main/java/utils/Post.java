@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class Post implements Serializable {
 
     private String city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo;
-//    private int[] photo;
     private List<Integer> photo;
     private int photoW, photoH;
     private boolean weakly;

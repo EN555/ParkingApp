@@ -34,8 +34,8 @@ public class PostsDataBaseConnection {
      * @param calledFrom - where the method was called, to notify when finished
      */
     public static void uploadPost(PostUploader calledFrom, Post post) {
-        DataBase.getReference("Posts").child("" + post.hashCode()).
-                setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+            DataBase.getReference("Posts").child("" + post.hashCode()).
+                    setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                   calledFrom.uploaded(task.isSuccessful());

@@ -6,9 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import DateBaseConnection.PostsDataBaseConnection;
+import Intrfaces.SearchCaller;
+import utils.Post;
+import utils.SearchFields;
 import utils.User;
 
-public class Manager extends AppCompatActivity implements View.OnClickListener {
+public class Manager extends AppCompatActivity implements View.OnClickListener, SearchCaller {
     private User user;
     private TextView hello;
     private Button post, users;
@@ -50,15 +58,23 @@ public class Manager extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
+    public void gotSearchResults(ArrayList<Post> posts) {
+        Intent i = new Intent(Manager.this, Delete.class);
+        i.putExtra("postsList", posts);
+        startActivity(i);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.post:
-                startActivity(new Intent(Manager.this, managerPost.class));
+                PostsDataBaseConnection.search(this,new HashMap<SearchFields, String>());
                 break;
             case R.id.user:
                 startActivity(new Intent(Manager.this, ManagerUsersList.class));
                 break;
-
         }
     }
+
+
 }

@@ -49,6 +49,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         }
         else{
             startActivity(new Intent(Delete.this, NoResults.class));
+            finish();
         }
 
     }
@@ -78,15 +79,6 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
      * set all button listeners
      */
     private void SetButtonsListeners(){
-
-//        //DEBUG
-//        System.out.println("next = " + next);
-//        System.out.println("prev = " + prev);
-//        System.out.println("Delete = " + Delete);
-//
-//        System.out.println("city = " + city);
-//        System.out.println("photo = " + photo);
-//        //END DEBUG
 
         this.next.setOnClickListener(this);
         this.prev.setOnClickListener(this);

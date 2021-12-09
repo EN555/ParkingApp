@@ -2,11 +2,13 @@ package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +74,8 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         this.next = (Button) findViewById(R.id.NextD);
         this.prev = (Button) findViewById(R.id.PrevD);
         this.delete = (Button) findViewById(R.id.DeleteD);
+//        this.delete_anyway = (Button) findViewById(R.id.delete_anyway);
+//        this.cancel = (Button) findViewById(R.id.cancel);
     }
 
 
@@ -83,6 +87,8 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         this.next.setOnClickListener(this);
         this.prev.setOnClickListener(this);
         this.delete.setOnClickListener(this);
+//        this.delete_anyway.setOnClickListener(this);
+//        this.cancel.setOnClickListener(this);
     }
 
     /**
@@ -153,7 +159,33 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         PostsDataBaseConnection.deletePost(this, postToDelete);
 
     }
+    public void valid_delete(){
+        final Dialog dialog = new Dialog(Delete.this);
+        dialog.setContentView(R.layout.activity_validdelete);
+        // adapt dialog window to screen size
+        int width = (int)(getResources().getDisplayMetrics().widthPixels);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.30);
 
+        dialog.getWindow().setLayout(width, height);
+        final TextView title_send = dialog.findViewById(R.id.check_valid);
+        Button delete_anyway = dialog.findViewById(R.id.delete_anyway);
+        Button cancel = dialog.findViewById(R.id.cancel);
+        dialog.show();
+        delete_anyway.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeletePost();
+                dialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
     @Override
     public void postRemoved(boolean isSuccessful) {
         if(!isSuccessful){
@@ -166,7 +198,6 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()){
             case R.id.NextD:
                 nextPost();
@@ -175,7 +206,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
                 prevPost();
                 break;
             case R.id.DeleteD:
-                DeletePost();
+                valid_delete();
                 break;
         }
     }

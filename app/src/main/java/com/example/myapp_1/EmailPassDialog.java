@@ -8,6 +8,6 @@ public class EmailPassDialog extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_email_pass_dialog);
+        setContentView(R.layout.activity_report_reason_dialog);
     }
 }

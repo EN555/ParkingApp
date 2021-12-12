@@ -1,13 +1,20 @@
 package com.example.myapp_1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,9 +49,29 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         // set text to say hello to the user
         helloText.setTypeface(null, Typeface.BOLD);
         helloText.setText("Hello " + user.getName());
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.user_prifile_menu, menu);
+        return true;
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logOut:
+                log_out();
+                break;
+            case R.id.contact:
+                startActivity(new Intent(UserProfile.this, Contacts.class));
+                break;
+            case R.id.userData:
+                userDataFunctionality();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -111,6 +138,43 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         Intent intent = new Intent(UserProfile.this, MainActivity.class);
         startActivity(intent);
         finish();  // This call is missing.
+    }
+
+    private void userDataFunctionality(){
+        final Dialog dialog = new Dialog(UserProfile.this);
+        dialog.setContentView(R.layout.activity_user_data);
+
+        // adapt dialog window to screen size
+        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.8);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.8);
+        dialog.getWindow().setLayout(width, height);
+
+        final TextView name = dialog.findViewById(R.id.dataName);
+        final TextView email = dialog.findViewById(R.id.dataEmail);
+        final TextView phone = dialog.findViewById(R.id.dataPhone);
+
+        name.setText(user.getName());
+        email.setText(user.getEmail());
+        phone.setText(user.getPhone());
+
+        final Button close = dialog.findViewById(R.id.dataClose);
+        final Button resetPassword = dialog.findViewById(R.id.dataPasswordReset);
+
+        dialog.show();
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserProfile.this, ForgotPassword.class));
+            }
+        });
     }
 
     @Override

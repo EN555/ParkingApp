@@ -3,7 +3,6 @@ package com.example.myapp_1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -111,43 +110,30 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
     private void spamRep(){
 
         final Dialog dialog = new Dialog(SearchResults.this);
-        dialog.setContentView(R.layout.activity_email_pass_dialog);
+        dialog.setContentView(R.layout.activity_report_reason_dialog);
 
         // adapt dialog window to screen size
-        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.70);
-        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.40);
+        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.30);
 
         dialog.getWindow().setLayout(width, height);
-        final EditText email_sender = dialog.findViewById(R.id.email);
-        final EditText password_sender = dialog.findViewById(R.id.password);
+        final EditText report_sender = dialog.findViewById(R.id.reportreason);
         Button submitButton = dialog.findViewById(R.id.report);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String em_send = email_sender.getText().toString();
-                // email validation
-                if(!InputChecks.CheckValidEMail(em_send)){
-                    email_sender.getText().clear();
-                    email_sender.setHint("Invalid email!");
-                    return;
-                }
-                // password validation
-                String pass_send = password_sender.getText().toString();
-                if(!InputChecks.CheckValidPassword(pass_send)){
-                    password_sender.getText().clear();
-                    password_sender.setHint("Invalid password!");
-                    return;
-                }
+                String rep_send = report_sender.getText().toString();
+
                 // send the message
                         Thread sender = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-        GMailSender sender = new GMailSender(em_send, pass_send);
+        GMailSender sender = new GMailSender("ParkingApp12345@gmail.com", "Parking123456789");
             sender.sendMail("EmailSender App",
-                    "This post suspect as spam,\nHis Details:" +"\nCity: " + city.getText().toString() + "\nStreet: " + street.getText().toString() + "\nHouse Number: " + houseNum.getText().toString() + "\nPrice: " + price.getText().toString() + "\nPhone Number: " + phoneNum.getText().toString(),
-                    em_send,
-                    "eviatarn@gmail.com");
+                    "This post suspect as spam,\nHis Details:" +"\nCity: " + city.getText().toString() + "\nStreet: " + street.getText().toString() + "\nHouse Number: " + houseNum.getText().toString() + "\nPrice: " + price.getText().toString() + "\nPhone Number: " + phoneNum.getText().toString() +"\nUser Message:\n" + rep_send,
+                    "ParkingApp12345@gmail.com",
+                    "ParkingApp12345@gmail.com");
                     dialog.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();}

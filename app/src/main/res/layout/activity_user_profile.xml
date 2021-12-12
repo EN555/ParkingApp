@@ -8,10 +8,18 @@
     android:foregroundTint="#04AF0C"
     tools:context=".UserProfile">
 
+
+    <include
+        android:id="@+id/toolBar"
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        layout="@layout/user_profile_tool_bar" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/hello_text"
@@ -31,15 +39,15 @@
         <GridLayout
 
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/hello_text"
-        android:layout_margin="20dp"
-        android:columnCount="2"
-        android:rowCount="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/hello_text"
+            android:layout_margin="20dp"
+            android:columnCount="2"
+            android:rowCount="2"
 
 
-        app:layout_constraintTop_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSearch"
@@ -196,11 +204,7 @@
             </androidx.cardview.widget.CardView>
 
 
-    </GridLayout>
-
-
-
-
+        </GridLayout>
 
 
     </RelativeLayout>

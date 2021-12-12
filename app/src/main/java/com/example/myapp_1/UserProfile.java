@@ -1,7 +1,9 @@
 package com.example.myapp_1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
@@ -36,6 +38,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        Toolbar bar = findViewById(R.id.toolBar);
+        setSupportActionBar(bar);
 
         // get the user data
         Bundle extras = getIntent().getExtras();

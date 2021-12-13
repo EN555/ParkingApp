@@ -15,17 +15,17 @@ import java.util.stream.Collectors;
 public class Post implements Serializable {
 
     private String city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo;
-    private List<Integer> photo;
-    private int photoW, photoH;
+//    private List<Integer> photo;
+//    private int photoW, photoH;
+    private int id;
     private boolean weakly;
     private User user;
     private double price;
     public Post(){ }
 
-    @SuppressLint("NewApi")
     public Post(String city, String street, String houseNum, double price,
                 String dataFrom, String timeFrom, String dateTo, String timeTo,
-                int[] photo, int photoW, int photoH, boolean weakly, User user) {
+                boolean weakly, User user) {
         this.city = city;
         this.street = street;
         this.houseNum = houseNum;
@@ -34,11 +34,12 @@ public class Post implements Serializable {
         this.timeFrom = timeFrom;
         this.dateTo = dateTo;
         this.timeTo = timeTo;
-        this.photo = Arrays.stream(photo).boxed().collect(Collectors.toList());
-        this.photoW = photoW;
-        this.photoH = photoH;
+//        this.photo = Arrays.stream(photo).boxed().collect(Collectors.toList());
+//        this.photoW = photoW;
+//        this.photoH = photoH;
         this.weakly = weakly;
         this.user = user;
+        this.id = this.hashCode();
     }
 
     // getters
@@ -50,11 +51,12 @@ public class Post implements Serializable {
     public String getTimeFrom() { return timeFrom; }
     public String getDateTo() { return dateTo; }
     public String getTimeTo() { return timeTo; }
-    public List<Integer> getPhoto() { return photo; }
-    public int getPhotoW() { return photoW; }
-    public int getPhotoH() { return photoH; }
+//    public List<Integer> getPhoto() { return photo; }
+//    public int getPhotoW() { return photoW; }
+//    public int getPhotoH() { return photoH; }
     public boolean isWeakly() { return weakly; }
     public User getUser() { return user; }
+    public int getID() { return id; }
 
 
     @Override
@@ -62,17 +64,17 @@ public class Post implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Post)) return false;
         Post post = (Post) o;
-        return photoW == post.photoW && photoH == post.photoH && weakly == post.weakly &&
-                Double.compare(post.price, price) == 0 && Objects.equals(city, post.city) &&
-                Objects.equals(street, post.street) && Objects.equals(houseNum, post.houseNum) &&
-                Objects.equals(dataFrom, post.dataFrom) && Objects.equals(timeFrom, post.timeFrom) &&
-                Objects.equals(dateTo, post.dateTo) && Objects.equals(timeTo, post.timeTo) &&
-                Objects.equals(photo, post.photo) && Objects.equals(user, post.user);
+        return weakly == post.weakly && Double.compare(post.price, price) == 0 &&
+                Objects.equals(city, post.city) && Objects.equals(street, post.street) &&
+                Objects.equals(houseNum, post.houseNum) && Objects.equals(dataFrom, post.dataFrom) &&
+                Objects.equals(timeFrom, post.timeFrom) && Objects.equals(dateTo, post.dateTo) &&
+                Objects.equals(timeTo, post.timeTo) && Objects.equals(user, post.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo, photo, photoW, photoH, weakly, user, price);
+        return Objects.hash(city, street, houseNum, dataFrom, timeFrom, dateTo, timeTo, weakly,
+                            user, price);
     }
 
     @Override
@@ -85,9 +87,7 @@ public class Post implements Serializable {
                 ", timeFrom='" + timeFrom + '\'' +
                 ", dateTo='" + dateTo + '\'' +
                 ", timeTo='" + timeTo + '\'' +
-                ", photo=" + photo.toString() +
-                ", photoW=" + photoW +
-                ", photoH=" + photoH +
+                ", id=" + id +
                 ", weakly=" + weakly +
                 ", user=" + user +
                 ", price=" + price +

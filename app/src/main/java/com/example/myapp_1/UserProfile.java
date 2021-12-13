@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -183,9 +184,10 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
-    public void gotSearchResults(ArrayList<Post> posts) {
+    public void gotSearchResults(ArrayList<Post> posts, ArrayList<Bitmap> photos) {
         Intent i = new Intent(UserProfile.this, Delete.class);
         i.putExtra("postsList", posts);
+        i.putExtra("photosList", photos);
         startActivity(i);
     }
 }

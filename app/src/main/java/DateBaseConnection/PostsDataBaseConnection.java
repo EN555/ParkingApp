@@ -1,9 +1,14 @@
 package DateBaseConnection;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import utils.SearchFields;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -11,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,21 +33,43 @@ public class PostsDataBaseConnection {
 
     private static FirebaseAuth DataBaseAuth = FirebaseAuth.getInstance();
     private static FirebaseDatabase DataBase = FirebaseDatabase.getInstance();
+    private static FirebaseStorage DataBaseStorage = FirebaseStorage.getInstance();
 
     /**
      * upload a new post to the data base
      * @param post - post to upload
      * @param calledFrom - where the method was called, to notify when finished
      */
-    public static void uploadPost(PostUploader calledFrom, Post post) {
-            DataBase.getReference("Posts").child("" + post.hashCode()).
+    public static void uploadPost(PostUploader calledFrom, Post post, Uri photo) {
+            DataBase.getReference("Posts").child("" + post.getID()).
                     setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                   calledFrom.uploaded(task.isSuccessful());
             }
         });
+
+
+            DataBaseStorage.getReference().child("Photos").child("" + post.getID()).putFile(photo);
+
+
     }
+//
+//    public static Bitmap getPostPhoto(int postID){
+//
+//        final long ONE_MEGABYTE = 1024 * 1024;
+//        DataBaseStorage.getReference("Photos").child("" + postID).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//            @Override
+//            public void onSuccess(byte[] bytes) {
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//
+//            }
+//        });
+//
+//
+//    }
+
+
     /**
      *
      * @param calledFrom - where the method was called, to notify when finished
@@ -59,6 +87,7 @@ public class PostsDataBaseConnection {
                     }
 
                     ArrayList<Post> posts = new ArrayList<>();
+                    ArrayList<Bitmap> photos = new ArrayList<>();
 
                     // go through all the posts and search according to the given values
                     for(Post p : allPosts){
@@ -85,10 +114,21 @@ public class PostsDataBaseConnection {
                                     break;
                             }
                         }
-                        if (b){ posts.add(p); }
+                        if (b){
+                            posts.add(p);
+                            final long ONE_MEGABYTE = 1024 * 1024;
+                            DataBaseStorage.getReference("Photos").child("" + p.getID()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                photos.add(bitmap);
+                            }
+                        });
+
+                        }
                     }
 
-                    calledFrom.gotSearchResults(posts);
+                    calledFrom.gotSearchResults(posts, photos);
 
                 }
 
@@ -124,6 +164,8 @@ public class PostsDataBaseConnection {
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
+
+        DataBaseStorage.getReference("Photos").child("" + toRemove.getID()).delete();
 
     }
 

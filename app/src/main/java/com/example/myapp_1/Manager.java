@@ -2,6 +2,7 @@ package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,9 +59,10 @@ public class Manager extends AppCompatActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void gotSearchResults(ArrayList<Post> posts) {
+    public void gotSearchResults(ArrayList<Post> posts, ArrayList<Bitmap> photos) {
         Intent i = new Intent(Manager.this, Delete.class);
         i.putExtra("postsList", posts);
+        i.putExtra("photosList", posts);
         startActivity(i);
     }
 

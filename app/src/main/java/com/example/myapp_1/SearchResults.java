@@ -26,6 +26,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
     Button next, prev, spam;
 
     ArrayList<Post> posts;
+    ArrayList<Bitmap> photos;
     int currentPostIndex;
 
     @Override
@@ -40,6 +41,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
            this.posts = (ArrayList<Post>)(extras.getSerializable("postsList"));
+           this.photos = (ArrayList<Bitmap>)(extras.getSerializable("photosList")) ;
         }
 
         // set view to the first post
@@ -90,7 +92,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         if(currentPostIndex == posts.size()){return;}
 
         Post currentPost = posts.get(currentPostIndex);
-        setViewToPost(currentPost);
+        setViewToPost(currentPost, photos.get(currentPostIndex));
         currentPostIndex++;
     }
     /**
@@ -102,7 +104,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         currentPostIndex--;
 
         Post currentPost = posts.get(currentPostIndex - 1);
-        setViewToPost(currentPost);
+        setViewToPost(currentPost, photos.get(currentPostIndex -1));
     }
     /**
      *  send manger mail for post spam
@@ -150,17 +152,16 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
      * set the text on the screen to the given Post
      * @param currentPost
      */
-    private void setViewToPost(Post currentPost){
+    private void setViewToPost(Post currentPost, Bitmap image) {
         city.setText(currentPost.getCity());
         street.setText(currentPost.getStreet());
         houseNum.setText(currentPost.getHouseNum());
-        from.setText(currentPost.getDataFrom() + "  :  " +currentPost.getTimeFrom());
-        to.setText(currentPost.getDateTo() + "  :  " +currentPost.getTimeTo());
+        from.setText(currentPost.getDataFrom() + "  :  " + currentPost.getTimeFrom());
+        to.setText(currentPost.getDateTo() + "  :  " + currentPost.getTimeTo());
         price.setText("" + currentPost.getPrice());
         phoneNum.setText(currentPost.getUser().getPhone());
 
-        photo.setImageBitmap(Bitmap.createBitmap(Ints.toArray(currentPost.getPhoto()), currentPost.getPhotoW(),
-                currentPost.getPhotoH(), Bitmap.Config.ARGB_8888));
+        photo.setImageBitmap(image);
     }
 
 

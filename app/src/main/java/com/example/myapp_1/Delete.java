@@ -28,6 +28,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
     Button next, prev, delete;
 
     ArrayList<Post> posts;
+    ArrayList<Bitmap> photos;
     int currentPostIndex;
 
     @Override
@@ -42,6 +43,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             this.posts = (ArrayList<Post>)(extras.getSerializable("postsList"));
+            this.photos = (ArrayList<Bitmap>)(extras.getSerializable("photosList")) ;
         }
 
         // set view to the first post
@@ -98,7 +100,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         if(currentPostIndex == posts.size()){return;}
 
         Post currentPost = posts.get(currentPostIndex);
-        setViewToPost(currentPost);
+        setViewToPost(currentPost, photos.get(currentPostIndex));
         currentPostIndex++;
     }
     /**
@@ -110,14 +112,14 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         currentPostIndex--;
 
         Post currentPost = posts.get(currentPostIndex - 1);
-        setViewToPost(currentPost);
+        setViewToPost(currentPost, photos.get(currentPostIndex - 1));
     }
 
     /**
      * set the text on the screen to the given Post
      * @param currentPost
      */
-    private void setViewToPost(Post currentPost){
+    private void setViewToPost(Post currentPost, Bitmap image){
         city.setText(currentPost.getCity());
         street.setText(currentPost.getStreet());
         houseNum.setText(currentPost.getHouseNum());
@@ -126,8 +128,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         price.setText("" + currentPost.getPrice());
         phoneNum.setText(currentPost.getUser().getPhone());
 
-        photo.setImageBitmap(Bitmap.createBitmap(Ints.toArray(currentPost.getPhoto()), currentPost.getPhotoW(),
-                currentPost.getPhotoH(), Bitmap.Config.ARGB_8888));
+        photo.setImageBitmap(image);
     }
 
     /**

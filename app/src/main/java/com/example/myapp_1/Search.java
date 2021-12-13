@@ -3,12 +3,14 @@ package com.example.myapp_1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,9 +63,10 @@ public class Search extends AppCompatActivity implements SearchCaller, View.OnCl
      * @param posts  - search results from data base
      */
     @Override
-    public void gotSearchResults(ArrayList<Post> posts) {
+    public void gotSearchResults(ArrayList<Post> posts, ArrayList<Bitmap> photos) {
         Intent i = new Intent(Search.this, SearchResults.class);
         i.putExtra("postsList", posts);
+        i.putExtra("photosList", photos);
         startActivity(i);
     }
 

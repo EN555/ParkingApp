@@ -36,6 +36,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     private Button publish;
     private  User user;
 
+    private Uri photoUri;
     private Bitmap object_photo = Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888);
             //BitmapFactory.decodeFileDescriptor(R.drawable.gif);
             //tmapFactory.decodeFile("app/src/main/res/drawable/gif.jpeg");
@@ -150,10 +151,10 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
         this.object_photo.getPixels(image, 0, object_photo.getWidth(),0, 0, object_photo.getWidth(), object_photo.getHeight());
         Post post = new Post(str_city, str_street, str_houseNum, num_price,
                 str_dateFrom, str_timeFrom, str_dateTo, str_timeTo,
-                image, object_photo.getWidth(), object_photo.getWidth(), isWeakly, user);
+                isWeakly, user);
 
         // upload post
-        PostsDataBaseConnection.uploadPost(this, post);
+        PostsDataBaseConnection.uploadPost(this, post, this.photoUri);
 
         // TODO: add option for weekly upload
 
@@ -167,6 +168,7 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
         if(requestCode == 1 && resultCode == RESULT_OK && data != null){
             Uri selectedPhoto = data.getData();
             photo.setImageURI(selectedPhoto);
+            this.photoUri = selectedPhoto;
 
 
             try {

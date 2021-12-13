@@ -1,15 +1,14 @@
 package com.example.myapp_1;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -184,10 +183,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
-    public void gotSearchResults(ArrayList<Post> posts, ArrayList<Bitmap> photos) {
+    public void gotSearchResults(ArrayList<Post> posts) {
         Intent i = new Intent(UserProfile.this, Delete.class);
         i.putExtra("postsList", posts);
-        i.putExtra("photosList", photos);
         startActivity(i);
     }
 }

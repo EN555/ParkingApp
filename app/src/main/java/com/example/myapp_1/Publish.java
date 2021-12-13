@@ -37,9 +37,6 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
     private  User user;
 
     private Uri photoUri;
-    private Bitmap object_photo = Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888);
-            //BitmapFactory.decodeFileDescriptor(R.drawable.gif);
-            //tmapFactory.decodeFile("app/src/main/res/drawable/gif.jpeg");
 
 
     @Override
@@ -147,8 +144,6 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
 
 
         // create post
-        int[] image = new int[this.object_photo.getWidth() * this.object_photo.getHeight()];
-        this.object_photo.getPixels(image, 0, object_photo.getWidth(),0, 0, object_photo.getWidth(), object_photo.getHeight());
         Post post = new Post(str_city, str_street, str_houseNum, num_price,
                 str_dateFrom, str_timeFrom, str_dateTo, str_timeTo,
                 isWeakly, user);
@@ -169,11 +164,6 @@ public class Publish extends AppCompatActivity implements View.OnClickListener, 
             Uri selectedPhoto = data.getData();
             photo.setImageURI(selectedPhoto);
             this.photoUri = selectedPhoto;
-
-
-            try {
-                this.object_photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedPhoto);
-            } catch (IOException e) { e.printStackTrace(); }
         }
 
     }

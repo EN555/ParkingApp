@@ -2,7 +2,7 @@ package com.example.myapp_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,10 +59,9 @@ public class Manager extends AppCompatActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void gotSearchResults(ArrayList<Post> posts, ArrayList<Bitmap> photos) {
+    public void gotSearchResults(ArrayList<Post> posts) {
         Intent i = new Intent(Manager.this, Delete.class);
         i.putExtra("postsList", posts);
-        i.putExtra("photosList", posts);
         startActivity(i);
     }
 
@@ -70,7 +69,7 @@ public class Manager extends AppCompatActivity implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.post:
-                PostsDataBaseConnection.search(this,new HashMap<SearchFields, String>());
+                PostsDataBaseConnection.search(this, new HashMap<SearchFields, String>());
                 break;
             case R.id.user:
                 startActivity(new Intent(Manager.this, ManagerUsersList.class));

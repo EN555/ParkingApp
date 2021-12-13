@@ -1,6 +1,6 @@
 package Intrfaces;
 
-import android.graphics.Bitmap;
+import android.net.Uri;
 
 import utils.Post;
 
@@ -8,6 +8,6 @@ import java.util.ArrayList;
 
 public interface SearchCaller {
 
-    void gotSearchResults(ArrayList<Post> posts, ArrayList<Bitmap> photos);
+    void gotSearchResults(ArrayList<Post> posts);
 
 }

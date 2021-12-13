@@ -35,9 +35,6 @@
             android:name=".SearchResults"
             android:exported="false" />
         <activity
-            android:name=".managerPost"
-            android:exported="false" />
-        <activity
             android:name=".Manager"
             android:exported="false" />
         <activity

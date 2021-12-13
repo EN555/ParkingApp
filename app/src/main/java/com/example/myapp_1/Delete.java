@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.primitives.Ints;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,6 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
     Button next, prev, delete;
 
     ArrayList<Post> posts;
-    ArrayList<Bitmap> photos;
     int currentPostIndex;
 
     @Override
@@ -43,7 +44,6 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             this.posts = (ArrayList<Post>)(extras.getSerializable("postsList"));
-            this.photos = (ArrayList<Bitmap>)(extras.getSerializable("photosList")) ;
         }
 
         // set view to the first post
@@ -76,8 +76,6 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         this.next = (Button) findViewById(R.id.NextD);
         this.prev = (Button) findViewById(R.id.PrevD);
         this.delete = (Button) findViewById(R.id.DeleteD);
-//        this.delete_anyway = (Button) findViewById(R.id.delete_anyway);
-//        this.cancel = (Button) findViewById(R.id.cancel);
     }
 
 
@@ -89,8 +87,6 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         this.next.setOnClickListener(this);
         this.prev.setOnClickListener(this);
         this.delete.setOnClickListener(this);
-//        this.delete_anyway.setOnClickListener(this);
-//        this.cancel.setOnClickListener(this);
     }
 
     /**
@@ -100,7 +96,7 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         if(currentPostIndex == posts.size()){return;}
 
         Post currentPost = posts.get(currentPostIndex);
-        setViewToPost(currentPost, photos.get(currentPostIndex));
+        setViewToPost(currentPost);
         currentPostIndex++;
     }
     /**
@@ -112,14 +108,18 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         currentPostIndex--;
 
         Post currentPost = posts.get(currentPostIndex - 1);
-        setViewToPost(currentPost, photos.get(currentPostIndex - 1));
+        setViewToPost(currentPost);
     }
 
     /**
      * set the text on the screen to the given Post
      * @param currentPost
      */
-    private void setViewToPost(Post currentPost, Bitmap image){
+    private void setViewToPost(Post currentPost){
+
+        // clear photo until new photo is downloaded from data base
+        photo.setImageResource(android.R.color.transparent);
+
         city.setText(currentPost.getCity());
         street.setText(currentPost.getStreet());
         houseNum.setText(currentPost.getHouseNum());
@@ -128,7 +128,15 @@ public class Delete extends AppCompatActivity implements View.OnClickListener, P
         price.setText("" + currentPost.getPrice());
         phoneNum.setText(currentPost.getUser().getPhone());
 
-        photo.setImageBitmap(image);
+        // download photo
+        final long ONE_MEGABYTE = 1024 * 1024;
+        FirebaseStorage.getInstance().getReference("Photos/" + currentPost.getID()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                photo.setImageBitmap(bitmap);
+            }
+        });
     }
 
     /**

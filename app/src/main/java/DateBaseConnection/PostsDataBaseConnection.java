@@ -17,7 +17,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StreamDownloadTask;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,26 +53,9 @@ public class PostsDataBaseConnection {
             }
         });
 
-
+            // upload photo
             DataBaseStorage.getReference().child("Photos").child("" + post.getID()).putFile(photo);
-
-
     }
-//
-//    public static Bitmap getPostPhoto(int postID){
-//
-//        final long ONE_MEGABYTE = 1024 * 1024;
-//        DataBaseStorage.getReference("Photos").child("" + postID).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//
-//            }
-//        });
-//
-//
-//    }
-
 
     /**
      *
@@ -87,7 +74,6 @@ public class PostsDataBaseConnection {
                     }
 
                     ArrayList<Post> posts = new ArrayList<>();
-                    ArrayList<Bitmap> photos = new ArrayList<>();
 
                     // go through all the posts and search according to the given values
                     for(Post p : allPosts){
@@ -116,19 +102,10 @@ public class PostsDataBaseConnection {
                         }
                         if (b){
                             posts.add(p);
-                            final long ONE_MEGABYTE = 1024 * 1024;
-                            DataBaseStorage.getReference("Photos").child("" + p.getID()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                            @Override
-                            public void onSuccess(byte[] bytes) {
-                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                photos.add(bitmap);
-                            }
-                        });
-
                         }
                     }
 
-                    calledFrom.gotSearchResults(posts, photos);
+                    calledFrom.gotSearchResults(posts);
 
                 }
 
@@ -165,6 +142,7 @@ public class PostsDataBaseConnection {
             public void onCancelled(@NonNull DatabaseError error) { }
         });
 
+        // delete photo
         DataBaseStorage.getReference("Photos").child("" + toRemove.getID()).delete();
 
     }

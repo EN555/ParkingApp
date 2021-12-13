@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.primitives.Ints;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
-import utils.InputChecks;
 import utils.Post;
 
 public class SearchResults extends AppCompatActivity implements View.OnClickListener {
@@ -26,7 +28,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
     Button next, prev, spam;
 
     ArrayList<Post> posts;
-    ArrayList<Bitmap> photos;
+    ArrayList<Uri> photos;
     int currentPostIndex;
 
     @Override
@@ -41,7 +43,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
            this.posts = (ArrayList<Post>)(extras.getSerializable("postsList"));
-           this.photos = (ArrayList<Bitmap>)(extras.getSerializable("photosList")) ;
+           this.photos = (ArrayList<Uri>)(extras.getSerializable("photosList")) ;
         }
 
         // set view to the first post
@@ -92,7 +94,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         if(currentPostIndex == posts.size()){return;}
 
         Post currentPost = posts.get(currentPostIndex);
-        setViewToPost(currentPost, photos.get(currentPostIndex));
+        setViewToPost(currentPost);
         currentPostIndex++;
     }
     /**
@@ -104,7 +106,7 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         currentPostIndex--;
 
         Post currentPost = posts.get(currentPostIndex - 1);
-        setViewToPost(currentPost, photos.get(currentPostIndex -1));
+        setViewToPost(currentPost);
     }
     /**
      *  send manger mail for post spam
@@ -152,7 +154,11 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
      * set the text on the screen to the given Post
      * @param currentPost
      */
-    private void setViewToPost(Post currentPost, Bitmap image) {
+    private void setViewToPost(Post currentPost) {
+
+        // clear photo until new photo is downloaded from data base
+        photo.setImageResource(android.R.color.transparent);
+
         city.setText(currentPost.getCity());
         street.setText(currentPost.getStreet());
         houseNum.setText(currentPost.getHouseNum());
@@ -161,7 +167,15 @@ public class SearchResults extends AppCompatActivity implements View.OnClickList
         price.setText("" + currentPost.getPrice());
         phoneNum.setText(currentPost.getUser().getPhone());
 
-        photo.setImageBitmap(image);
+        // download photo
+        final long ONE_MEGABYTE = 1024 * 1024;
+        FirebaseStorage.getInstance().getReference("Photos/" + currentPost.getID()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    photo.setImageBitmap(bitmap);
+                }
+            });
     }
 
 

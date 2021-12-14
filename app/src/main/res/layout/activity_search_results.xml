@@ -175,16 +175,16 @@
 
     <Button
         android:id="@+id/reportspam"
-        android:layout_width="81dp"
-        android:layout_height="40dp"
+        android:layout_width="94dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@color/cardview_shadow_start_color"
         android:text="spam"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Next"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toEndOf="@+id/Prev"
         app:layout_constraintTop_toBottomOf="@+id/card"
-        app:layout_constraintVertical_bias="0.738" />
+        app:layout_constraintVertical_bias="0.964" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
